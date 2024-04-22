@@ -7,16 +7,19 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 const Footer = () => {
+	const currentYear=new Date().getFullYear()
 	return (
 		<div className="flex items-start gap-10 justify-between w-full md:pt-[50px] pb-[50px] md:pb-[120px] md:flex-row flex-col md:gap-4">
 			<div className="flex items-start gap-4 flex-col">
-				<Title>Boilerbay</Title>
+				<Title>
+					<img src="/images/directEd.png" alt="DirectEd logo footer" width={'150px'}/>
+				</Title>
 				<Subtitle>
-					Boilerbay is a platform that helps you find the best indie games.
+					DirectEd helps you find the best talent to invest in.
 				</Subtitle>
 				<SocialLinks />
 				<Subtitle className="text-[13px]">
-					Copywrite © 2023 Boilerbay. All rights reserved.
+					Copyright © {currentYear} DirectEd Development. All rights reserved.
 				</Subtitle>
 			</div>
 

@@ -36,7 +36,8 @@ const Navbar = ({ user }: { user?: User }) => {
 		<nav className="flex items-center justify-between py-6 px-6 md:px-14 xl:px-24 w-full z-50">
 			<div className="flex items-center justify-start">
 				<a href="/" className="font-bold md:text-2xl">
-					<img src="" alt="DirectEd logo"/>
+					<img src="/images/directEd-horizontal.png" 
+					width={'200px'} alt="DirectEd logo"/>
 				</a>
 			</div>
 			<div className="items-center justify-end md:flex hidden border rounded-lg border-primary/50 gap-8 px-10 py-3 bg-primary/10">

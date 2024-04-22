@@ -32,20 +32,20 @@ const Header = ({ user }: { user?: User }) => {
 			<div className="flex flex-col lg:flex-row items-center justify-between gap-10 w-full mt-[40px] md:mt-[80px] sm:mt-[100px] px-4 md:px-14 xl:px-24 min-h-[50vh]">
 				<div className="flex flex-col items-center lg:items-start gap-6 lg:text-left text-center">
 					<Badge variant="outline" className="py-1">
-						<p className="text-primary font-normal">Invest in a student</p>
+						<p className="text-primary font-normal">Invest in talent</p>
 					</Badge>
-					<Title className="text-4xl md:text-6xl">
-						Powerful solutions for <br className="md:block hidden" /> your
-						business
+					<Title className="text-4xl md:text-5xl">
+						Talent Investment Pools shaping <br className="md:block hidden" /> a brighter
+						future
 					</Title>
 					<Subtitle className="md:text-lg">
-						We provide solutions to grow your business. We are a team of{" "}
+					We provide a platform where you can invest in the careers of talented 
 						<br className="md:block hidden" />
-						developers and designers.
+						individuals from low-income countries and enjoy returns on your investment.
 					</Subtitle>
 					<div className="flex items-center justify-start gap-8 md:flex-row flex-col">
-						<Button>Get started</Button>
-						<UsedBy />
+						<Button>Invest Now</Button>
+						
 					</div>
 				</div>
 				<div className="w-[100%] md:w-[80%] lg:w-[50%] flex gap-4 items-center relative lg:flex-row flex-col">

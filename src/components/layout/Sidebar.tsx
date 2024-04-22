@@ -17,18 +17,18 @@ const TopLinks = [
 		icon: <DashboardIcon />,
 	},
 	{
-		title: "Projects",
-		href: "/projects",
+		title: "Investments",
+		href: "/investments",
 		icon: <ArchiveIcon />,
 	},
 	{
-		title: "Messages",
-		href: "/messages",
+		title: "Pools",
+		href: "/pools",
 		icon: <EnvelopeClosedIcon />,
 	},
 	{
-		title: "Payments",
-		href: "/payments",
+		title: "Your pools",
+		href: "/Your pools",
 		icon: <CrumpledPaperIcon />,
 	},
 	{

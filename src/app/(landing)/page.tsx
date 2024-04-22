@@ -17,12 +17,12 @@ const Home = async () => {
 		<>
 			<Header user={user} />
 			<div className="lg:max-w-7xl md:max-w-5xl w-[95%] mx-auto flex flex-col items-center gap-20 md:gap-36">
-				<LogoCloud />
+				{/* <LogoCloud />
 				<Overviews />
 				<Features />
 				<Pricing user={user} userSubscription={userSubscription} />
 				<Testimonials />
-				<Faq />
+				<Faq /> */}
 				<Footer />
 			</div>
 		</>

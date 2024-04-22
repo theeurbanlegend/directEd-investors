@@ -4,7 +4,6 @@ import { Bricolage_Grotesque } from "next/font/google";
 import { ThemeProvider } from "../components/theme-provider";
 import { Session } from "../providers/SessionProvider";
 import { siteConfig } from "../config/site";
-import dynamic from "next/dynamic";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
@@ -72,12 +71,11 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	const CrispWithNoSSR = dynamic(() => import("../config/crisp"));
+	
 	return (
 		<html lang="en">
-			<CrispWithNoSSR />
 			<PHProvider>
-				<body className={font.className}>
+				<body className={font.className} >
 					<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
 					<Session>
 						<ThemeProvider

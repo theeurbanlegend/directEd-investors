@@ -10,9 +10,9 @@ export type SiteConfig = {
 }
 
 export const siteConfig: SiteConfig = {
-    name: "Boilerbay",
+    name: "DirectEd Investors",
     description:
-        "Focus on your business, not boilerplate code.",
+        "A place to find your ideal investment pool.",
     url: "http://localhost:3000",
     ogImage: "",
     links: {
