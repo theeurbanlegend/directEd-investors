@@ -12,24 +12,14 @@ import Link from "next/link";
 
 const TopLinks = [
 	{
-		title: "Dashboard",
-		href: "/dashboard",
+		title: "Portfolio",
+		href: "/portfolio",
 		icon: <DashboardIcon />,
-	},
-	{
-		title: "Investments",
-		href: "/investments",
-		icon: <ArchiveIcon />,
 	},
 	{
 		title: "Pools",
 		href: "/pools",
 		icon: <EnvelopeClosedIcon />,
-	},
-	{
-		title: "Your pools",
-		href: "/Your pools",
-		icon: <CrumpledPaperIcon />,
 	},
 	{
 		title: "Analytics",

@@ -56,7 +56,7 @@ const Navbar = ({ user }: { user?: User }) => {
 					<ProfileDropdown user={user} />
 				) : (
 					<Button>
-						<Link href="/auth/signin">Sign in</Link>
+						<Link href="/auth/sign-in">Sign in</Link>
 					</Button>
 				)}
 				<ModeToggle />

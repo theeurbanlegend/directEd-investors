@@ -33,21 +33,21 @@ const data = [
 
 const categories = [
 	{
-		title: "Sales",
-		metric: "$ 12,699",
-		metricPrev: "$ 9,456",
+		title: "Active Investments",
+		metric: "$ 12,6",
+		metricPrev: "$ 9,46",
 		delta: "34.3%",
 		deltaType: "moderateIncrease",
 	},
 	{
-		title: "Profit",
+		title: "Total Investments",
 		metric: "$ 12,348",
 		metricPrev: "$ 10,456",
 		delta: "18.1%",
 		deltaType: "moderateIncrease",
 	},
 	{
-		title: "Customers",
+		title: "Gain/Loss",
 		metric: "948",
 		metricPrev: "1,082",
 		delta: "12.3%",

@@ -1,141 +1,54 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider     = "mongodb"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+model Investor {
+  investor_id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  investor_name  String
+  profile        String      // bio
+  pools_invested PoolInvestment[]
 }
 
-model Account {
-  id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?  @db.Text
-  session_state     String?
-  createdAt         DateTime @default(now()) @map(name: "created_at")
-  updatedAt         DateTime @default(now()) @map(name: "updated_at")
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@index([userId])
-  @@map(name: "accounts")
+model PoolInvestment {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  investor            Investor      @relation(fields: [investor_id], references: [investor_id])
+  investor_id         String
+  pool                StudentPool   @relation(fields: [pool_id], references: [pool_id])
+  pool_id             String
+  selected_students   Student[]     // Reference to the selected students
+  @@unique([pool_id, selected_students])
 }
 
-model Session {
-  id           @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-  @@map(name: "sessions")
+model StudentPool {
+  pool_id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  pool_name             String
+  pool_commision_rate  Int
+  pool_description     String?
+  students              Student[]   // Many-to-many relationship with students
+  @@unique([pool_id, students])
 }
 
-model User {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
-
-  File    File[]
-  Message Message[]
-
-  accounts Account[]
-  sessions Session[]
-
-  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
-  stripePriceId          String?   @map(name: "stripe_price_id")
-  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
-
-  credits Int @default(10)
-
-  markdowns Markdown[]
-
-  @@map(name: "users")
+model Student {
+  student_id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  student_name  String
+  bio           String      // Profile pic and other bio stuff
+  timeline      Timeline[]
+  pools         StudentPool[]   // Many-to-many relationship with pools
 }
 
-model Markdown {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String   @unique
-  content   String
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
-
-  @@map(name: "markdowns")
-  @@index([userId])
-}
-
-enum UploadStatus {
-  PENDING
-  PROCESSING
-  FAILED
-  SUCCESS
-}
-
-model File {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
- name String
-
-  uploadStatus UploadStatus @default(PENDING)
-  url          String
-  key          String
-  messages     Message[]
-
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-
-  User User? @relation(fields: [userId], references: [id])
-  userId String?
-
-  @@map(name: "files")
-  @@index([userId])
-}
-
-model Message {
- id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String   @unique
-  text String @db.Text()
-
-  isUserMessage Boolean
-
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  File      File?         @relation(fields: [fileId], references: [id])
-  fileId    String?
-  User      User?         @relation(fields: [userId], references: [id])
-  userId    String?
-
-  @@map(name: "messages")
-  @@index([fileId])
-  @@index([userId])
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map(name: "verification_tokens")
+model Timeline {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  student     Student  @relation(fields: [student_id], references: [student_id])
+  student_id  String
+  institution String
+  years       Int
+  achievements String
 }
