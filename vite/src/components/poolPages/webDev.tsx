@@ -1,5 +1,5 @@
 import React from 'react';
-import StudentProfileCard from '../students/StudentProfileCard';
+// import StudentProfileCard from '../students/StudentProfileCard';
 
 const WEBDEV: React.FC = () => {
     return (
@@ -26,9 +26,9 @@ const WEBDEV: React.FC = () => {
                         Web development skills are in high demand in industries such as technology, e-commerce, media, and entertainment. Investing in students' education in this area can lead to rewarding career opportunities and innovation in various sectors.
                     </p>
                 </section>
-                <section>
+                {/* <section>
                     <StudentProfileCard/>
-                </section>
+                </section> */}
                 {/* <section className="my-8 text-center">
                     <h2 className="text-2xl font-bold mb-4">Progress Towards Funding Goal</h2>
                     <div className="bg-gray-200 h-8 w-full rounded-md overflow-hidden mb-4 mx-auto">
