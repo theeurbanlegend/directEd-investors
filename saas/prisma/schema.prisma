@@ -2,53 +2,35 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
-
-model Investor {
-  investor_id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  investor_name  String
-  profile        String      // bio
-  pools_invested PoolInvestment[]
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255)
+  content   String?
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
 }
 
-model PoolInvestment {
-  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-  investor            Investor      @relation(fields: [investor_id], references: [investor_id])
-  investor_id         String
-  pool                StudentPool   @relation(fields: [pool_id], references: [pool_id])
-  pool_id             String
-  selected_students   Student[]     // Reference to the selected students
-  @@unique([pool_id, selected_students])
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  user   User    @relation(fields: [userId], references: [id])
+  userId Int     @unique
 }
 
-model StudentPool {
-  pool_id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  pool_name             String
-  pool_commision_rate  Int
-  pool_description     String?
-  students              Student[]   // Many-to-many relationship with students
-  @@unique([pool_id, students])
-}
-
-model Student {
-  student_id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  student_name  String
-  bio           String      // Profile pic and other bio stuff
-  timeline      Timeline[]
-  pools         StudentPool[]   // Many-to-many relationship with pools
-}
-
-model Timeline {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  student     Student  @relation(fields: [student_id], references: [student_id])
-  student_id  String
-  institution String
-  years       Int
-  achievements String
+model User {
+  id      Int      @id @default(autoincrement())
+  email   String   @unique
+  name    String?
+  posts   Post[]
+  profile Profile?
 }
