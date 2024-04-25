@@ -1,10 +1,11 @@
-import { Props } from '../types';
-import QueryProvider from './queryClientProvider'
+import { Props } from "../types";
+import QueryProvider from "./queryClientProvider";
+import { UserProvider } from "./userContext";
 
-export function AppContextProvider({ children }:Props) {
+export function AppContextProvider({ children }: Props) {
   return (
-    <QueryProvider>
-        {children}
-    </QueryProvider>
+    <UserProvider>
+      <QueryProvider>{children}</QueryProvider>
+    </UserProvider>
   );
 }

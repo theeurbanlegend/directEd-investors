@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import Home from "./componentss/Home"
-import Login from "./componentss/Forms/LoginForm"
-import Pools from "./componentss/pools/page"
-// import Navbar from "./componentss/Navbar"
-// import Footer from "./componentss/Footer"
+import Home from "./components/Home"
+import Login from "./components/Forms/LoginForm"
+import Pools from "./components/pools/page"
+import PortfolioPage from "./components/portfolio/page"
+import InvestmentOpportunity from "./components/investments/details/InvestmentDetails"
 
 
 
@@ -13,15 +13,14 @@ function App() {
     <>
       <Router>
         <Routes>
-          {/* <Navbar /> */}
           <Route>
             <Route path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
-            {/* <Route path="/investment" element={<Investment/>}/> */}
+            <Route path="/investments" element={<InvestmentOpportunity/>}/>
             <Route path="/pools" element={<Pools/>}/>
+            <Route path="/portfolio" element={<PortfolioPage/>}/>
             {/* <Route path="/investment" element={<Investment/>}/> */}
           </Route>
-          {/* <Footer /> */}
         </Routes>
       </Router>
     </>

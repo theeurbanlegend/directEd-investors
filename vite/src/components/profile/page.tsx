@@ -1,8 +1,8 @@
-import Title, { Subtitle } from "../../components/common/Title";
-import ChangeProfile from "../../components/common/UserImage";
-import { Badge } from "../../components/ui/badge";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
+// import Title, { Subtitle } from "../../components/common/Title";
+// import ChangeProfile from "../../components/common/UserImage";
+// import { Badge } from "../../components/ui/badge";
+// import { Input } from "../../components/ui/input";
+// import { Label } from "../../components/ui/label";
 // import { getCurrentUser } from "@/src/lib/session";
 // import { getUserSubscription } from "@/src/lib/subscription";
 // import { User } from "next-auth";
@@ -13,21 +13,20 @@ const Profile = async () => {
 	// const subscription = (await getUserSubscription(user.id)) as {
 	// 	isPro: boolean;
 	// };
-
 	return (
 		<div className="p-10 flex flex-col items-start gap-6 w-full h-full">
 			<div className="flex items-start justify-between w-full">
 				<div className="flex flex-col items-start gap-4">
-					<Title className="flex items-center gap-3">
+					<h1 className="flex items-center gap-3">
 						Profile
-						<Badge  className="rounded-sm">
+						<div  className="rounded-sm">
 							{/* {subscription.isPro ? "Pro" : "Free"} */}
-						</Badge>
-					</Title>
-					<Subtitle>
+						</div>
+					</h1>
+					<h2>
 						Your profile information is only visible to you and your
 						organization.
-					</Subtitle>
+					</h2>
 				</div>
 				{/* {user?.image && ( */}
 					<img
@@ -42,8 +41,8 @@ const Profile = async () => {
 			</div>
 			<div className="flex justify-between items-center gap-4 flex-wrap w-full">
 				<div className="grid w-full max-w-sm items-center gap-3">
-					<Label htmlFor="email">Email</Label>
-					<Input
+					<label htmlFor="email">Email</label>
+					<input
 						type="email"
 						id="email"
 						placeholder="Email"
@@ -51,7 +50,7 @@ const Profile = async () => {
 						// {user.email!}
 					/>
 				</div>
-				<ChangeProfile />
+				{/* <ChangeProfile /> */}
 			</div>
 		</div>
 	);
