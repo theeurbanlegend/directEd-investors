@@ -4,6 +4,7 @@ import Login from "./components/Forms/LoginForm"
 import Pools from "./components/pools/page"
 import PortfolioPage from "./components/portfolio/page"
 import InvestmentOpportunity from "./components/investments/details/InvestmentDetails"
+import CheckoutPage from "./components/workflow/checkout/payout/page"
 
 
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/investments" element={<InvestmentOpportunity/>}/>
             <Route path="/pools" element={<Pools/>}/>
             <Route path="/portfolio" element={<PortfolioPage/>}/>
+            <Route path="/pay" element={<CheckoutPage/>}/>
             {/* <Route path="/investment" element={<Investment/>}/> */}
           </Route>
         </Routes>
