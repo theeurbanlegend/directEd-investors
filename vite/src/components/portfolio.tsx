@@ -16,11 +16,9 @@ interface Props {
 
 const PortfolioPage: React.FC<Props> = ({ investments, totalInvestment, tokenBalance }) => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-3/4">
-        <h2 className="text-2xl font-bold mb-4">Portfolio</h2>
-        <h3 className="text-xl font-semibold mb-2">Your Investments</h3>
-        <div className="space-y-4">
+    <div className="flex flex-row justify-center items-center h-screen w-full">
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg p-8 w-full">
+        <div className="flex flex-col gap-4 w-full">
           {investments.map((investment, index) => (
             <div key={index} className="bg-gray-100 rounded-lg p-4">
               <h4 className="text-lg font-semibold">Investment Pool: {investment.pool}</h4>

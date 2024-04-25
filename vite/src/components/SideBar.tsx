@@ -43,7 +43,8 @@ const Sidebar = () => {
 		<div className="flex flex-col py-3 px-6 h-full w-full justify-between items-start">
 			<div className="flex flex-col items-start gap-12 h-full">
 				<Link to="/">
-					<h1 className="text-xl md:text-2xl">Boilerbay.</h1>
+				<img src="/images/directEd-horizontal.png" 
+					width={'200px'} alt="DirectEd logo"/>
 				</Link>
 				<div className="flex flex-col items-start gap-6">
 					{TopLinks.map((link, index) => (

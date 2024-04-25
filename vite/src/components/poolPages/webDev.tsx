@@ -4,7 +4,7 @@ const WEBDEV: React.FC = () => {
     return (
         <>
             <div className="flex justify-center mt-8">
-                <h1 className="text-6xl text-gray-500">&lt;html&gt;</h1>
+                <h1 className="text-6xl text-gray-500">&lt;&gt;</h1>
             </div>
             <div className="mx-auto p-4">
                 <section className="my-8 text-center max-w-4xl mx-auto">

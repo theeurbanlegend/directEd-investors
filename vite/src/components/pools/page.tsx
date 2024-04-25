@@ -62,7 +62,7 @@ const Pools: React.FC = () => {
           heading3: "Progress",
           progress: 20, // Pass the progress percentage here
           paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "https://example.com",
+          Link: "/details/web",
         })}
         <div className="text-center mt-10 md:hidden font-bold text-xl">UI/UX Design</div>
         {renderCard({
@@ -73,7 +73,7 @@ const Pools: React.FC = () => {
           heading3: "Progress",
           progress: 50, // Pass the progress percentage here
           paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "https://example.com",
+          Link: "/details/ui",
         })}
         <div className="text-center mt-10 md:hidden font-bold text-xl">Generative AI</div>
         {renderCard({
@@ -84,7 +84,7 @@ const Pools: React.FC = () => {
           heading3: "Progress",
           progress: 80, // Pass the progress percentage here
           paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "https://example.com",
+          Link: "/details/ai",
         })}
       </div>
     </div>

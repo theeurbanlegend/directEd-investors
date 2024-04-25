@@ -58,7 +58,7 @@ const Navbar = () => {
 					<ProfileDropdown user={user} />
 				) : ( */}
 					<button>
-						<Link to="/auth/sign-in">Sign in</Link>
+						<Link to="/login">Sign in</Link>
 					</button>
 				{/* )} */}
 				{/* <ModeToggle /> */}
