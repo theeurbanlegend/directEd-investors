@@ -6,7 +6,7 @@ const Footer = () => {
 	
 	const currentYear=new Date().getFullYear()
 	return (
-		<div className="flex items-start gap-10 justify-between w-full md:pt-[50px] pb-[50px] md:pb-[120px] md:flex-row flex-col md:gap-4">
+		<div className="flex items-start gap-10 p-8 justify-between w-full md:flex-row flex-col md:gap-4">
 			<div className="flex items-start gap-4 flex-col">
 				<h1>
 					<img src="/images/directEd.png" alt="DirectEd logo footer" width={'150px'}/>

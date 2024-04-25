@@ -7,7 +7,7 @@ const LandingLayout = ({ children }: { children: React.ReactNode }) => {
 			<div className="h-full w-[250px]">
 				<Sidebar />
 			</div>
-			<div className="h-full w-[100%] border rounded-lg bg-secondary overflow-hidden">
+			<div className="h-full w-[100%] border rounded-lg bg-secondary overflow-auto">
 				{children}
 			</div>
 		</main>
