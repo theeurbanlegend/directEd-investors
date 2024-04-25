@@ -5,6 +5,6 @@ const poolSchema= new mongoose.Schema({
     pool_desc:{type:String},
     pool_commission_rate:{type:String},
     students:[{type:mongoose.Types.ObjectId, ref:'Student'}]
-})
+}, {timestamps:true})
 const Pool=mongoose.model('Pool', poolSchema)
 module.exports=Pool
