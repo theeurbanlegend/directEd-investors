@@ -1,4 +1,5 @@
 import React from 'react';
+import InvestmentOpportunity from '../investments/details/InvestmentDetails';
 
 const WEBDEV: React.FC = () => {
     return (
@@ -34,6 +35,9 @@ const WEBDEV: React.FC = () => {
                         This is an animated representation of progress towards the funding goal.
                     </p>
                 </section> */}
+                <section className="my-8 text-center max-w-4xl mx-auto">
+                <InvestmentOpportunity/>
+                </section>
             </div>
         </>
     );

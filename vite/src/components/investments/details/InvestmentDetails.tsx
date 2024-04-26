@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import {Link }from 'react-router-dom';
+import {Link, useNavigate }from 'react-router-dom';
 import StudentProfileCard from '../../students/StudentProfileCard';
 
 const InvestmentOpportunity = () => {
+  const navigate=useNavigate()
   const opportunity = {
     description: "Invest in students enrolled in a 15-week intensive tech skills bootcamp. They will learn programming languages, web development, and software engineering fundamentals.",
     targetAmount: "$50,000",
@@ -43,10 +44,9 @@ const InvestmentOpportunity = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white shadow overflow-hidden sm:rounded-lg w-full max-w-6xl mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-900">Investment Opportunity: Tech Skills Bootcamp</h2>
-        <div className="px-4 py-5 sm:px-6 flex">
-          <p className="mt-2 text-gray-700">{opportunity.description}</p>
-         <input type="number" value={tokens} onChange={tokenchange}/>
+        <div className="px-4 py-5 sm:px-6 flex items-center justify-start  gap-3">
+          <label htmlFor="token">Tokens To Invest</label>
+         <input type="number" className='border p-2 border-indigo-200 rounded-full' value={tokens} onChange={tokenchange}/>
         </div>
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -92,7 +92,7 @@ const InvestmentOpportunity = () => {
         </div>
 
         <div className="px-4 py-5 sm:px-6">
-          <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline">
+          <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={()=>navigate('/pay')}>
             Invest Now
           </button>
         </div>
