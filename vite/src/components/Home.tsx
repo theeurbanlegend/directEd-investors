@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./Navbar";
 import StudentProfileCard from "./students/StudentProfileCard";
 import { Link } from "react-router-dom";
