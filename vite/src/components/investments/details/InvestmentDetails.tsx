@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import {Link, useNavigate }from 'react-router-dom';
 import StudentProfileCard from '../../students/StudentProfileCard';
+import Navbar from '../../Navbar';
+import Footer from '../../Footer';
 
 const InvestmentOpportunity = () => {
   const navigate=useNavigate()
@@ -42,7 +44,9 @@ const InvestmentOpportunity = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+    <>
+    <Navbar/>
+    <div className="min-h-screen bg-white p-10 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white shadow overflow-hidden sm:rounded-lg w-full max-w-6xl mx-auto">
         <div className="px-4 py-5 sm:px-6 flex items-center justify-start  gap-3">
           <div className='mr-auto'>
@@ -91,18 +95,24 @@ const InvestmentOpportunity = () => {
           </dl>
         </div>
 
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg font-medium text-gray-900">Student Profiles</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="px-4 py-5 sm:px-6 ">
+          <h3 className="text-lg font-medium text-gray-900 text-center mb-10">Student Profiles</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 md:ml-28">
             {opportunity.students.map(student => (
               <StudentProfileCard key={student.name} student={student} /> 
             ))}
           </div>
         </div>
-
-       
+        <div className="px-4 py-5 sm:px-6 flex justify-center">
+            <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate('/login')}>
+              Sign in to take part in the future
+            </button>
+          </div>
       </div>
-    </div>
+    </div>    
+    <Footer/>
+    </>
+
   );
 };
 

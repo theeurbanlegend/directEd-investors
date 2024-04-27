@@ -9,6 +9,11 @@ import { Link }from "react-router-dom";
 
 const TopLinks = [
 	{
+		title: "Dashboard",
+		href: "/dashboard",
+		icon: <DashboardIcon />,
+	},
+	{
 		title: "Portfolio",
 		href: "/portfolio",
 		icon: <DashboardIcon />,
@@ -46,7 +51,7 @@ const Sidebar = () => {
 				<img src="/images/directEd-horizontal.png" 
 					width={'200px'} alt="DirectEd logo"/>
 				</Link>
-				<div className="flex flex-col items-start gap-6">
+				<div className="flex flex-col items-start gap-6 ">
 					{TopLinks.map((link, index) => (
 						<Link to={link.href} key={index}>
 							<div

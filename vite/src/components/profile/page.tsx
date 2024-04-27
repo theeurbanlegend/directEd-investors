@@ -30,7 +30,7 @@ const Profile = async () => {
 				</div>
 				{/* {user?.image && ( */}
 					<img
-						src=''
+						src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ooJmIA9DMZvBPgm0c9mh4At24wCqsCUJe-p7c3-jQ-6WkT2lsAa7ntOPYQpJ8CMEmaw&usqp=CAU'
 						// {user.image}
 						width={110}
 						height={110}

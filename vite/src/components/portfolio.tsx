@@ -17,7 +17,7 @@ interface Props {
 const PortfolioPage: React.FC<Props> = ({ investments, totalInvestment, tokenBalance }) => {
   return (
     <div className="flex flex-row justify-center items-center h-screen w-full">
-      <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg p-8 w-full">
+      <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg p-6 w-full">
         <div className="flex flex-col gap-4 w-full">
           {investments.map((investment, index) => (
             <div key={index} className="bg-gray-100 rounded-lg p-4">
