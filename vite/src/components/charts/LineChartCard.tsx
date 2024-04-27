@@ -1,14 +1,6 @@
-"use client";
+"use client"
 
-import {
-	Card,
-	Metric,
-	Text,
-	AreaChart,
-	BadgeDelta,
-	Flex,
-	Grid,
-} from "@tremor/react";
+import { Card, Metric, Text, AreaChart, BadgeDelta, Flex } from "@tremor/react";
 
 const data = [
 	{
@@ -23,6 +15,7 @@ const data = [
 		Profit: 1398,
 		Customers: 2938,
 	},
+	// ...
 	{
 		Month: "Jul 21",
 		Sales: 3490,
@@ -33,36 +26,22 @@ const data = [
 
 const categories = [
 	{
-		title: "Web development",
+		title: "Sales",
 		metric: "$ 12,699",
 		metricPrev: "$ 9,456",
 		delta: "34.3%",
 		deltaType: "moderateIncrease",
-	},
-	{
-		title: "UI/UX",
-		metric: "$ 12,348",
-		metricPrev: "$ 10,456",
-		delta: "18.1%",
-		deltaType: "moderateIncrease",
-	},
-	{
-		title: "Generative AI",
-		metric: "948",
-		metricPrev: "1,082",
-		delta: "12.3%",
-		deltaType: "moderateDecrease",
 	},
 ];
 
 const valueFormatter = (number: number) =>
 	`$${Intl.NumberFormat("us").format(number).toString()}`;
 
-const DashboardStats = () => {
+export default function LineChartCard() {
 	return (
-		<Grid numItemsSm={2} numItemsLg={3} className="gap-6 w-full">
+		<div className="w-[100%] ">
 			{categories.map((item) => (
-				<Card key={item.title} className="bg-white rounded-lg ">
+				<Card key={item.title} className="border rounded-lg">
 					<Flex alignItems="start">
 						<Text>{item.title}</Text>
 						<BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
@@ -76,7 +55,7 @@ const DashboardStats = () => {
 						<Text>from {item.metricPrev}</Text>
 					</Flex>
 					<AreaChart
-						className="mt-6 h-12"
+						className="mt-6 h-28 "
 						data={data}
 						index="Month"
 						valueFormatter={valueFormatter}
@@ -90,8 +69,6 @@ const DashboardStats = () => {
 					/>
 				</Card>
 			))}
-		</Grid>
+		</div>
 	);
-};
-
-export default DashboardStats;
+}

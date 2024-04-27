@@ -9,6 +9,7 @@ import WEBDEV from "./components/poolPages/webDev"
 import UIUIX from "./components/poolPages/UIUX"
 import GenAI from "./components/poolPages/GenAI"
 import Dashboard from "./components/Dashboard/page"
+import Profile from "./components/profile/page"
 
 
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/details/web" element={<WEBDEV/>}/>
             <Route path="/details/ui" element={<UIUIX/>}/>
             <Route path="/details/ai" element={<GenAI/>}/>
+            <Route path="/profile" element={<Profile/>}/>
             {/* <Route path="/investment" element={<Investment/>}/> */}
           </Route>
         </Routes>

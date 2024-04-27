@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Link, useNavigate }from 'react-router-dom';
+import { useNavigate }from 'react-router-dom';
 import StudentProfileCard from '../../students/StudentProfileCard';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
