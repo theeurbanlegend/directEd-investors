@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { FaCreditCard, FaPaypal, FaBitcoin, FaApplePay } from 'react-icons/fa'; // Import icons
+import { useNavigate } from 'react-router-dom';
 
-const stripePromise = loadStripe('your_stripe_publishable_key');
+//const stripePromise = loadStripe('your_stripe_publishable_key');
 
 const CheckoutPage: React.FC = () => {
   const [paymentMethod, setPaymentMethod] = useState('');
-
+  const navigate=useNavigate()
   const handleClick = async () => {
-    const stripe = await stripePromise;
-    const response = await fetch('/api/create-checkout-session', { method: 'POST' });
-    const session = await response.json();
-    const result = await stripe?.redirectToCheckout({ sessionId: session.id });
-    if (result?.error) {
-      console.error(result.error.message);
-    }
+    // const stripe = await stripePromise;
+    // const response = await fetch('/api/create-checkout-session', { method: 'POST' });
+    // const session = await response.json();
+    // const result = await stripe?.redirectToCheckout({ sessionId: session.id });
+    // if (result?.error) {
+    //   console.error(result.error.message);
+    // }
+    navigate('/portfolio')
   };
 
   const handlePaymentMethodChange = (method: string) => {

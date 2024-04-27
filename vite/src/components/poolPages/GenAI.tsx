@@ -1,4 +1,5 @@
 import React from 'react';
+import InvestmentOpportunity from '../investments/details/InvestmentDetails';
 
 const GenAI: React.FC = () => {
     return (
@@ -36,6 +37,9 @@ const GenAI: React.FC = () => {
                     <p className="text-lg mb-4">
                         Generative AI technologies have the potential to revolutionize various industries, including entertainment, marketing, healthcare, and manufacturing. Investing in this area can lead to the development of new products, services, and experiences that enhance human creativity and productivity.
                     </p>
+                </section>
+                <section className="my-8 text-center max-w-4xl mx-auto">
+                <InvestmentOpportunity/>
                 </section>
             </div>
         </>

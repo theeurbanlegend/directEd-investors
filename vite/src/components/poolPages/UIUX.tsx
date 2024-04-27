@@ -1,4 +1,5 @@
 import React from 'react';
+import InvestmentOpportunity from '../investments/details/InvestmentDetails';
 
 const UIUIX: React.FC = () => {
     return (
@@ -26,6 +27,9 @@ const UIUIX: React.FC = () => {
                     <p className="text-lg mb-4">
                         UI/UX design skills are essential in industries such as technology, e-commerce, finance, and healthcare. Investing in students' education in this area can lead to improved product usability, increased customer satisfaction, and business growth.
                     </p>
+                </section>
+                <section className="my-8 text-center max-w-4xl mx-auto">
+                <InvestmentOpportunity/>
                 </section>
                 {/* <section className="my-8 text-center">
                     <h2 className="text-2xl font-bold mb-4">Progress Towards Funding Goal</h2>

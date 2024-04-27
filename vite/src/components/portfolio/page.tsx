@@ -40,12 +40,12 @@ const Portfolio = () => {
 	return (
 		<LandingLayout>
 		<div className="flex flex-col items-start w-full h-full p-6 overflow-y-auto">
-			<div className="flex items-start flex-col w-full h-full">
-				<div className="flex items-start justify-start w-full gap-2 flex-col">
+			<div className="flex items-start flex-col w-full h-full justify-between gap-16">
+				<div className="flex items-start justify-start w-full gap-2 flex-col mb-10">
 					<h1 className="md:text-4xl">Welcome, </h1>
 					<p>Your Investments</p>
 				</div>
-				<div className="flex flex-row items-start w-full">
+				<div className=" w-full">
 					
 					<PortfolioPage investments={investments} totalInvestment={totalInvestment} tokenBalance={tokenBalance}/>
 				</div>
