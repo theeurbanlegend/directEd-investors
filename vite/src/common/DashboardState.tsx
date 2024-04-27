@@ -62,7 +62,7 @@ const DashboardStats = () => {
 	return (
 		<Grid numItemsSm={2} numItemsLg={3} className="gap-6 w-full">
 			{categories.map((item) => (
-				<Card key={item.title} className="bg-white rounded-lg ">
+				<Card key={item.title} className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
 					<Flex alignItems="start">
 						<Text>{item.title}</Text>
 						<BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
