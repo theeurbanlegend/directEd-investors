@@ -64,6 +64,7 @@ export default function Login() {
           <a href="/forgot-password" className="text-gray-500 hover:underline">Forgot password?</a>
         </div>
       </div>
-    </div>
+</div>
+
   );
 }
