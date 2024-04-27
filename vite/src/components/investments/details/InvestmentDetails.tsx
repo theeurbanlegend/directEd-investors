@@ -49,8 +49,17 @@ const InvestmentOpportunity = () => {
     <div className="min-h-screen bg-white p-10 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white shadow overflow-hidden sm:rounded-lg w-full max-w-6xl mx-auto">
         <div className="px-4 py-5 sm:px-6 flex items-center justify-start  gap-3">
+          <div className='mr-auto'>
           <label htmlFor="token">Tokens To Invest</label>
          <input type="number" className='border p-2 border-indigo-200 rounded-full' value={tokens} onChange={tokenchange}/>
+         </div>
+
+         <div className="px-4 py-5 sm:px-6">
+          <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={()=>navigate('/pay')}>
+            Invest Now
+          </button>
+        </div>
+
         </div>
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
@@ -94,7 +103,6 @@ const InvestmentOpportunity = () => {
             ))}
           </div>
         </div>
-
         <div className="px-4 py-5 sm:px-6 flex justify-center">
             <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate('/login')}>
               Sign in to take part in the future
