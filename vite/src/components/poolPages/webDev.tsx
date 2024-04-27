@@ -1,9 +1,11 @@
 import React from 'react';
-import InvestmentOpportunity from '../investments/details/InvestmentDetails';
+// import InvestmentOpportunity from '../investments/details/InvestmentDetails';
+import LandingLayout from '../portfolio/layout';
 
 const WEBDEV: React.FC = () => {
     return (
         <>
+        <LandingLayout>
             <div className="flex justify-center mt-8">
                 <h1 className="text-6xl text-gray-500">&lt;&gt;</h1>
             </div>
@@ -38,10 +40,10 @@ const WEBDEV: React.FC = () => {
                         This is an animated representation of progress towards the funding goal.
                     </p>
                 </section> */}
-                <section className="my-8 text-center max-w-4xl mx-auto">
-                <InvestmentOpportunity/>
-                </section>
-            </div>
+
+            </div>            
+        </LandingLayout>
+
         </>
     );
 };

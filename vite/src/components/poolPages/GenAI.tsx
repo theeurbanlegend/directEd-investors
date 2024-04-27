@@ -1,9 +1,11 @@
 import React from 'react';
-import InvestmentOpportunity from '../investments/details/InvestmentDetails';
+// import InvestmentOpportunity from '../investments/details/InvestmentDetails';
+import LandingLayout from '../portfolio/layout';
 
 const GenAI: React.FC = () => {
     return (
         <>
+        <LandingLayout>
             <div className="flex justify-center mt-8">
                 {/* Placeholder icon representing AI or technology */}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -38,10 +40,12 @@ const GenAI: React.FC = () => {
                         Generative AI technologies have the potential to revolutionize various industries, including entertainment, marketing, healthcare, and manufacturing. Investing in this area can lead to the development of new products, services, and experiences that enhance human creativity and productivity.
                     </p>
                 </section>
-                <section className="my-8 text-center max-w-4xl mx-auto">
+                {/* <section className="my-8 text-center max-w-4xl mx-auto">
                 <InvestmentOpportunity/>
-                </section>
-            </div>
+                </section> */}
+            </div>            
+        </LandingLayout>
+
         </>
     );
 };

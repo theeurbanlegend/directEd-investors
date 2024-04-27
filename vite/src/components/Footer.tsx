@@ -6,11 +6,11 @@ const Footer = () => {
 	
 	const currentYear=new Date().getFullYear()
 	return (
-		<div className="flex items-start gap-10 p-8 justify-between w-full md:flex-row flex-col md:gap-4">
+		<div className="flex items-start bg-[#395241] text-white gap-10 p-8 justify-between w-full md:flex-row flex-col md:gap-4 ">
 			<div className="flex items-start gap-4 flex-col">
-				<h1>
+				{/* <h1>
 					<img src="/images/directEd.png" alt="DirectEd logo footer" width={'150px'}/>
-				</h1>
+				</h1> */}
 				<h2>
 					DirectEd helps you find the best talent to invest in.
 				</h2>
@@ -38,7 +38,9 @@ const Footer = () => {
 					Subscribe to our newsletter to get the latest news and updates.
 				</h2>
 				<div className="flex items-start gap-4 md:flex-row flex-col md:w-fit w-full">
-					<input placeholder="Email Address" />
+					<input placeholder="Email Address" 
+					className="p-2"
+					/>
 					<button>Subscribe</button>
 				</div>
 			</div>
