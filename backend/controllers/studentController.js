@@ -4,12 +4,12 @@ const Pool = require('../models/poolSchema');
 const Investor = require('../models/investorSchema');
 
 const addStudent = async (req, res) => {
-    const { student_name, bio, profile } = req.body;
+    const { student_name, bio, education, careerGoals, fundingNeed, } = req.body;
     if (!student_name) {
         return res.status(400).json({ msg: "Student name is required" });
     }
     try {
-        const newStudent = new Student({ student_name, bio,pools_in:[], profile, timeline:[] });
+        const newStudent = new Student({ student_name, bio,education, careerGoals, fundingNeed, pools_in:[], profile:[{url:""}], achievements:[] });
         await newStudent.save();
         return res.status(201).json(newStudent);
     } catch (error) {
