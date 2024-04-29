@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../common/button";
 import { Input } from "../../common/input";
 import { Separator } from "../../common/separator";
 import Gradient from "../../common/gradient";
+import PasswordInput from "../../common/PasswordInput";
+import { useAddUserMutation } from "../../hooks/useAddUserMutation";
 
 const Signup = () => {
   const [formValues, setFormValues] = useState({
@@ -12,16 +14,26 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-
-  const handleInputChange = (e) => {
+  const [isPassVisible, setIsPassVisible] = useState(false);
+  const navigate=useNavigate()
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
+  const addUserMutation=useAddUserMutation()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e: any) => {
     e.preventDefault();
-    // Implement form submission logic here, e.g., validation and API request
-    console.log("Form submitted:", formValues);
+    const {username, email, password, confirmPassword}=formValues
+    if(!username || !email || !password || ! confirmPassword || password !==confirmPassword){
+      console.log("Requirements not met!")
+      return
+    }
+    const res=await addUserMutation.mutateAsync({name:username, email, password})
+    if (res?.accessToken) {
+      localStorage.setItem("vite-access-token", res.accessToken);
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -29,10 +41,13 @@ const Signup = () => {
       <Gradient className="dark:blur-[200px]" />
       <div className="py-6 px-8 sm:px-16 absolute top-0 left-0">
         <a href="/" className="font-bold md:text-2xl">
-          <img src="/images/directEd-horizontal.png"
-            width={'200px'} alt="DirectEd logo" />
+          <img
+            src="/images/directEd-horizontal.png"
+            width={"200px"}
+            alt="DirectEd logo"
+          />
         </a>
-        </div>
+      </div>
       <div className="w-[100%] flex items-center justify-center h-full">
         <div className="flex flex-col items-center justify-center gap-6">
           <div className="flex flex-col items-center justify-center gap-2">
@@ -65,27 +80,29 @@ const Signup = () => {
               value={formValues.email}
               onChange={handleInputChange}
             />
-            <Input
-              name="password"
-              placeholder="Password"
-              type="password"
+            <PasswordInput
+              inputName={"password"}
+              isPassVisible={isPassVisible}
               value={formValues.password}
+              setIsPassVisible={setIsPassVisible}
               onChange={handleInputChange}
+              placeholder={"Password"}
             />
-            <Input
-              name="confirmPassword"
-              placeholder="Confirm password"
-              type="password"
+
+            <PasswordInput
+              inputName={"confirmPassword"}
+              isPassVisible={isPassVisible}
               value={formValues.confirmPassword}
+              setIsPassVisible={setIsPassVisible}
               onChange={handleInputChange}
+              placeholder={"Confirm password"}
             />
             <Button className="w-full" type="submit">
-            <Link to="/Login">Sign up</Link>
+              Sign up
             </Button>
           </form>
 
           <Separator />
-
         </div>
       </div>
     </div>

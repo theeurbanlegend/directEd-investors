@@ -8,6 +8,7 @@ import LineChartCard from "./charts/LineChartCard";
 import SalesCard from "./charts/SalesCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const Header = () => {
     return (
@@ -27,7 +28,7 @@ const Header = () => {
         >
             <Navbar />
             {/* <Gradient className="w-[100%] dark:block hidden" /> */}
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-10 w-full mt-[40px] md:mt-[80px] sm:mt-[100px] px-4 md:px-14 xl:px-24 min-h-[50vh]">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-10 w-full my-[40px] md:my-[80px] sm:my-[100px] px-4 md:px-14 xl:px-24 min-h-[50vh]">
                 <div className="flex flex-col items-center lg:items-start gap-6 lg:text-left text-center">
                     <Badge className="py-1 border rounded-lg">
                         <p className="text-primary font-normal">Take part in the futre makings</p>
@@ -56,6 +57,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </motion.div>
     );
 };
