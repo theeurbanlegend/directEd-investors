@@ -52,7 +52,7 @@ export default function Login() {
                 New to Indie-kit?
               </p>
               <Button variant="link" size="sm" className="px-2">
-                <Link to="/signup">Sign up</Link>
+                <Link to="/Sign-up">Sign up</Link>
               </Button>
             </div>
           </div>

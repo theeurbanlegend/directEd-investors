@@ -10,6 +10,7 @@ import UIUIX from "./components/poolPages/UIUX"
 import GenAI from "./components/poolPages/GenAI"
 import Dashboard from "./components/Dashboard/page"
 import Profile from "./components/profile/page"
+import Signup from "./components/Forms/SignUp"
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route>
             <Route path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/sign-up" element={<Signup/>}/>
             <Route path="/investments" element={<InvestmentOpportunity/>}/>
             <Route path="/pools" element={<Pools/>}/>
             <Route path="/portfolio" element={<PortfolioPage/>}/>
