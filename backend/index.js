@@ -6,7 +6,7 @@ const corsOptions=require('cors')
 const invRouter = require('./routes/invRoutes')
 const studentRouter = require('./routes/studentRoutes')
 const poolRouter = require('./routes/poolRoutes')
-
+app.use(express.json())
 app.use(corsOptions())
 app.use('/api/inv', invRouter)
 app.use('/api/students', studentRouter)
