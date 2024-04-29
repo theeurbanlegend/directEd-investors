@@ -3,12 +3,12 @@ const Student = require('../models/studentSchema');
 
 
 const addPool = async (req, res) => {
-    const { pool_name, pool_desc, pool_commission_rate } = req.body;
-    if (!pool_name) {
+    const { pool_name, pool_desc, pool_target_amnt, pool_commission_rate, pool_extra_desc} = req.body;
+    if (!pool_name ) {
         return res.status(400).json({ msg: "Pool name is required" });
     }
     try {
-        const newPool = new Pool({ pool_name, pool_desc, pool_commission_rate, students:[] });
+        const newPool = new Pool({ pool_name, pool_desc, pool_target_amnt, pool_progress:0, pool_extra_desc, students:[] });
         await newPool.save();
         return res.status(201).json(newPool);
     } catch (error) {
