@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../common/button";
 import { Input } from "../../common/input";
@@ -84,8 +85,6 @@ const Signup = () => {
           </form>
 
           <Separator />
-
-
 
         </div>
       </div>
