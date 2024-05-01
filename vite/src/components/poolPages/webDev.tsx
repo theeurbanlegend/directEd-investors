@@ -126,7 +126,7 @@ const WEBDEV: React.FC = () => {
           className="absolute top-0 left-1/2 transform -translate-x-1/2 z-50 bg-gray-800 text-white px-4 py-2 rounded"
           onClick={scrollToStudentProfiles}
         >
-          <FaArrowAltCircleDown />2
+          <FaArrowAltCircleDown />
         </button>
         <section ref={studentProfilesRef} className="h-screen flex justify-center items-center">
           <div className="p-10">
