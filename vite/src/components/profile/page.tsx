@@ -1,14 +1,18 @@
-import Title, { Subtitle } from "../../common/Title";
-import { Badge } from "../../common/badge";
-import { Input } from "../../common/input";
-import LandingLayout from "../portfolio/layout";
-import { Label } from "../ui/label";
+import React, { useEffect } from 'react';
+import Title, { Subtitle } from '../../common/Title';
+import { Badge } from '../../common/badge';
+import LandingLayout from '../portfolio/layout';
+import { Label } from '../ui/label';
+import { useUserContext } from '../../context/userContext';
 
 // Sample data for development (commented out original data fetching)
 const sampleUser = {
-	image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ooJmIA9DMZvBPgm0c9mh4At24wCqsCUJe-p7c3-jQ-6WkT2lsAa7ntOPYQpJ8CMEmaw&usqp=CAU",
+	image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ooJmIA9DMZvBPgm0c9mh4At24wCqsCUJe-p7c3-jQ-6WkT2lsAa7ntOPYQpJ8CMEmaw&usqp=CAU',
 	id: 123,
-	email: "example@example.com",
+	email: 'example@example.com',
+	tokenBalance: 1000, // Sample token balance amount
+	studentsInvestedIn: 5, // Sample number of students invested in
+	cashInvestedSinceStart: 5000, // Sample cash amount invested since start
 };
 
 const sampleSubscription = {
@@ -16,18 +20,19 @@ const sampleSubscription = {
 };
 
 const Profile = () => {
-	// Original data fetching (commented out for development)
-	// const user = (await getCurrentUser()) as User;
-	// const subscription = (await getUserSubscription(user.id)) as { isPro: boolean; };
+	const { name, email, getCurrentUser } = useUserContext()
 
+	useEffect(() => {
+		getCurrentUser()
+	}, [])
 	// Use sample data for development
 	const user = sampleUser;
 	const subscription = sampleSubscription;
 
 	return (
 		<LandingLayout>
-			<div className="p-10 flex flex-col items-center  gap-6 w-full h-full">
-				<div className="">
+			<div className="flex flex-col items-center justify-center h-full">
+				<div className="p-10 w-full max-w-md">
 					<div className="flex flex-col items-center gap-4">
 						{user?.image && (
 							<img
@@ -41,30 +46,30 @@ const Profile = () => {
 						<Title className="flex items-center gap-3">
 							Profile
 							<Badge variant="default" className="rounded-sm">
-								{subscription.isPro ? "Pro" : "Free"}
+								{subscription.isPro ? 'Pro' : 'Free'}
 							</Badge>
 						</Title>
-						<Subtitle>
+						<Subtitle className='text-center'>
 							Your profile information is only visible to you and your organization.
 						</Subtitle>
-						<div className="w-full mt-10 mx-auto">
-							<div className="grid max-w-sm items-center gap-3">
-								<Label htmlFor="email">Email</Label>
-								<Input
-									type="email"
-									id="email"
-									placeholder="Email"
-									value={user.email}
-								/>
+						<div className="w-full mt-10">
+							<div className="text-center">
+								<Label>Name:</Label>
+								<p className="text-2xl font-bold">{name}</p>
+								<Label>Email:</Label>
+								<p className="text-xl">{email}</p>
+								<Label>Token Balance:</Label>
+								<p className="text-xl">{user.tokenBalance}</p>
+								<Label>Students Invested In:</Label>
+								<p className="text-xl">{user.studentsInvestedIn}</p>
+								<Label>Cash Invested Since Start:</Label>
+								<p className="text-xl">{user.cashInvestedSinceStart}</p>
 							</div>
-							{/* <ChangeProfile /> */}
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</LandingLayout>
-
 	);
 };
 
