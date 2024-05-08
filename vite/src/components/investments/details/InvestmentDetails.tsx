@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate }from 'react-router-dom';
 import StudentProfileCard from '../../students/StudentProfileCard';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
+import { useQuery } from 'react-query';
+import { getStudents } from '../../../api/requests/getStudents';
 
 const InvestmentOpportunity = () => {
   const navigate=useNavigate()
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const profilesRef = useRef<HTMLDivElement>(null);
+  const { data: studentsData, isLoading, isError } = useQuery("students", getStudents);
   const opportunity = {
     description: "Invest in students enrolled in a 15-week intensive tech skills bootcamp. They will learn programming languages, web development, and software engineering fundamentals.",
     targetAmount: "$50,000",
@@ -15,26 +20,6 @@ const InvestmentOpportunity = () => {
     paymentMethod: "Credit Card (via Stripe)",
     returnDetail: "Investors will receive tokens equivalent to their investment amount, which can be redeemed for a percentage of the students' future earnings after they secure employment.",
     impact: "Funds will cover tuition fees, materials, and living expenses for students during the bootcamp.",
-    students: [
-        {
-          imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ooJmIA9DMZvBPgm0c9mh4At24wCqsCUJe-p7c3-jQ-6WkT2lsAa7ntOPYQpJ8CMEmaw&usqp=CAU',
-          name: "Sarah Johnson",
-          education: "Bachelor's degree in Computer Science",
-          careerGoals: "Aspires to become a full-stack developer",
-          experience: "Completed internships at leading tech companies, participated in hackathons",
-          fundingNeed: "Seeking financial support to cover tuition fees and living expenses during the bootcamp",
-        },
-        {
-          imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ooJmIA9DMZvBPgm0c9mh4At24wCqsCUJe-p7c3-jQ-6WkT2lsAa7ntOPYQpJ8CMEmaw&usqp=CAU',
-          name: "John Smith",
-          education: "High school graduate with a passion for technology",
-          careerGoals: "Aims to transition into a career in software development",
-          experience: "Self-taught coder, participated in coding competitions",
-          fundingNeed: "Requires assistance to afford bootcamp tuition and materials",
-        },
-      
-      
-    ],
   };
 
   const [tokens, setTokens]  = useState(0);
@@ -97,11 +82,22 @@ const InvestmentOpportunity = () => {
 
         <div className="px-4 py-5 sm:px-6 ">
           <h3 className="text-lg font-medium text-gray-900 text-center mb-10">Student Profiles</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 md:ml-28">
-            {opportunity.students.map(student => (
-              <StudentProfileCard key={student.name} student={student} /> 
-            ))}
-          </div>
+          <section ref={profilesRef} className="h-screen flex justify-center items-center">
+                <div className="p-10">
+                    <div className="flex flex-row justify-center">
+                        {isLoading ? (
+                            <p>Loading...</p>
+                        ) : isError ? (
+                            <p>Error fetching data</p>
+                        ) : (
+                            studentsData &&
+                            studentsData.map((student: any, index: number) => (
+                                <StudentProfileCard key={index} student={student} />
+                            ))
+                        )}
+                    </div>
+                </div>
+            </section>
         </div>
         <div className="px-4 py-5 sm:px-6 flex justify-center">
             <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate('/login')}>
