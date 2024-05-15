@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 const SalesCard = ({ className }: { className?: string }) => (
     <Card className={twMerge("lg:max-w-xs lg:mx-auto border rounded-lg", className)}>
-        <Text>Sales</Text>
+        <Text>Course</Text>
         <Metric>$ 71,465</Metric>
         <Flex className="mt-4">
             <Text>32% of annual target</Text>

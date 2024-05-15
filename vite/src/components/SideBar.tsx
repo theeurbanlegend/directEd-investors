@@ -28,6 +28,11 @@ const TopLinks = [
 		href: "/analytics",
 		icon: <LightningBoltIcon />,
 	},
+	{
+		title: "Create",
+		href: "/create",
+		icon: <LightningBoltIcon />,
+	},
 ];
 
 const BottomLinks = [

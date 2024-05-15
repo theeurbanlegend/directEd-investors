@@ -1,16 +1,16 @@
 import { useRef, useState } from 'react';
 import { useNavigate }from 'react-router-dom';
-import StudentProfileCard from '../../students/StudentProfileCard';
+// import StudentProfileCard from '../../students/StudentProfileCard';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
-import { useQuery } from 'react-query';
-import { getStudents } from '../../../api/requests/getStudents';
+// import { useQuery } from 'react-query';
+// import { getStudents } from '../../../api/requests/getStudents';
 
 const InvestmentOpportunity = () => {
   const navigate=useNavigate()
-  const detailsRef = useRef<HTMLDivElement>(null);
-  const profilesRef = useRef<HTMLDivElement>(null);
-  const { data: studentsData, isLoading, isError } = useQuery("students", getStudents);
+  // const detailsRef = useRef<HTMLDivElement>(null);
+  // const profilesRef = useRef<HTMLDivElement>(null);
+  // const { data: studentsData, isLoading, isError } = useQuery("students", getStudents);
   const opportunity = {
     description: "Invest in students enrolled in a 15-week intensive tech skills bootcamp. They will learn programming languages, web development, and software engineering fundamentals.",
     targetAmount: "$50,000",
@@ -36,7 +36,7 @@ const InvestmentOpportunity = () => {
         <div className="px-4 py-5 sm:px-6 flex items-center justify-start  gap-3">
           <div className='mr-auto'>
           <label htmlFor="token">Tokens To Invest</label>
-         <input type="number" className='border p-2 border-indigo-200 rounded-full' value={tokens} onChange={tokenchange}/>
+          <input type="number" className='border p-2 ml-4 border-indigo-200 rounded-full' value={tokens} onChange={tokenchange}/>
          </div>
 
          <div className="px-4 py-5 sm:px-6">
@@ -81,8 +81,8 @@ const InvestmentOpportunity = () => {
         </div>
 
         <div className="px-4 py-5 sm:px-6 ">
-          <h3 className="text-lg font-medium text-gray-900 text-center mb-10">Student Profiles</h3>
-          <section ref={profilesRef} className="h-screen flex justify-center items-center">
+          {/* <h3 className="text-lg font-medium text-gray-900 text-center mb-10">Student Profiles</h3> */}
+          {/* <section ref={profilesRef} className="h-screen flex justify-center items-center">
                 <div className="p-10">
                     <div className="flex flex-row justify-center">
                         {isLoading ? (
@@ -97,7 +97,7 @@ const InvestmentOpportunity = () => {
                         )}
                     </div>
                 </div>
-            </section>
+            </section> */}
         </div>
         <div className="px-4 py-5 sm:px-6 flex justify-center">
             <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate('/login')}>
