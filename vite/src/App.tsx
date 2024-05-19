@@ -14,6 +14,7 @@ import Signup from "./components/Forms/SignUp"
 import StudentProfileForm from "./components/Admin/Studentforms"
 import CreatePoolPage from "./components/Admin/pool"
 import Create from "./components/Create/page"
+import StudentMoreDetails from "./components/students/StudentMoreDetails"
 
 
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/details/ui" element={<UIUIX/>}/>
             <Route path="/details/ai" element={<GenAI/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/profile/:id" element={<StudentMoreDetails/>}/>
             <Route path="/poolForm" element={<CreatePoolPage/>}/>
             <Route path="/Studentform" element={<StudentProfileForm/>}/>
             {/* <Route path="/investment" element={<Investment/>}/> */}

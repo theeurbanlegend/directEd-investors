@@ -1,11 +1,13 @@
 import API from "../api"
-interface studentInput{
-    student_name:string
+export interface studentInput extends FormData{
+    name:string
     education:string
     careerGoals:string
+    experience:string
     fundingNeed:string
+    file?:File
 }
-export const addStudent=async({student_name, education, careerGoals, fundingNeed}:studentInput)=>{
-    const res=await API.post('/api/students/new', {student_name, education, careerGoals, fundingNeed})
+export const addStudent=async(studentData:studentInput)=>{
+    const res=await API.post('/api/students/new', studentData)
     return res.data
 }

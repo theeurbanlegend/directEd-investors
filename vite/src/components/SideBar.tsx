@@ -25,7 +25,7 @@ const TopLinks = [
 	},
 	{
 		title: "Analytics",
-		href: "/analytics",
+		href: "#",
 		icon: <LightningBoltIcon />,
 	},
 	{
@@ -43,7 +43,7 @@ const BottomLinks = [
 	},
 	{
 		title: "Settings",
-		href: "/settings",
+		href: "#",
 		icon: <GearIcon />,
 	},
 ];

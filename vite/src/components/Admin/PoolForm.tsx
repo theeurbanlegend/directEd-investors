@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LandingLayout from '../portfolio/layout';
 import { Button } from '../../common/button';
+import { useAddPoolMutation } from '../../hooks/useAddPoolMutation';
 
 interface PoolFormProps {
     onSubmit: (formData: PoolFormData) => void;
@@ -18,16 +19,18 @@ const PoolForm: React.FC<PoolFormProps> = ({ onSubmit }) => {
         targetAmount: '',
         description: '',
     });
+    const addPoolMutation=useAddPoolMutation();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(formData);
         // Reset form after submission
+        await addPoolMutation.mutateAsync({pool_name:formData.poolName, pool_desc:formData.description, pool_extra_desc:'', pool_target_amnt:formData.targetAmount});
         setFormData({ poolName: '', targetAmount: '', description: '' });
     };
 
