@@ -26,7 +26,7 @@ const data = [
 
 const categories = [
 	{
-		title: "Sales",
+		title: "Course",
 		metric: "$ 12,699",
 		metricPrev: "$ 9,456",
 		delta: "34.3%",
@@ -44,7 +44,7 @@ export default function LineChartCard() {
 				<Card key={item.title} className="border rounded-lg">
 					<Flex alignItems="start">
 						<Text>{item.title}</Text>
-						<BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
+						<BadgeDelta className="rounded-full text-xs" deltaType={item.deltaType}>{item.delta}</BadgeDelta>
 					</Flex>
 					<Flex
 						className="space-x-3 truncate"

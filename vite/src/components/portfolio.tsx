@@ -37,11 +37,9 @@ const PortfolioPage: React.FC<Props> = ({ investments, totalInvestment, tokenBal
         </div>
         <div className="mt-4">
           <h3 className="text-xl font-semibold mb-2">Investment History</h3>
-          {/* Display investment history here */}
         </div>
         <div className="mt-4">
           <h3 className="text-xl font-semibold mb-2">Return on Investment (ROI) Tracker</h3>
-          {/* Display ROI tracker here */}
         </div>
       </div>
     </div>
