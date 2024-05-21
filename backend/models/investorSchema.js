@@ -9,7 +9,8 @@ const investorSchema= new mongoose.Schema({
     pools_invested:[{
         pool_id:{type:mongoose.Types.ObjectId, ref:'Pool'},
         students_selected:[{type:mongoose.Types.ObjectId, ref:'Student'}]
-    }]
+    }],
+    investments:[{type:mongoose.Types.ObjectId, ref:'Investment'}]
 })
 const Investor=mongoose.model('Investor', investorSchema)
 module.exports=Investor

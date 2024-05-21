@@ -7,7 +7,7 @@ const loginHandler=async(req, res)=>{
     if(!investor_email || !password){
         return res.status(400).json({msg:"Email or passowrd are required"})
     }
-    const loginUser=await Investor.findOne({investor_email})
+    const loginUser=await Investor.findOne({investor_email}).populate('investments').populate('pools_invested.pool_id').populate('pools_invested.students_selected')
     if(!loginUser){
         return res.status(404).json({msg:"Not found!"})
     }
@@ -15,7 +15,7 @@ const loginHandler=async(req, res)=>{
     const isValidPass=await bcrypt.compare(password, loginUser.password)
     if(!isValidPass) return res.status(403).json({msg:"Unauthorised!"})
     const accessToken=jwtSign(loginUser._id, loginUser.investor_name, loginUser.investor_email, loginUser?.profile[0]?.url)
-    return res.status(200).json({"accessToken":accessToken})
+    return res.status(200).json({"accessToken":accessToken, "inv":loginUser})
 }
 const signupHandler=async(req, res)=>{
     const {investor_name, investor_email, password, profile,bio}=req.body
