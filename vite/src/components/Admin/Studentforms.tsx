@@ -12,7 +12,8 @@ const StudentProfileForm = () => {
     experience: "",
     fundingNeed: "",
     imageFile: "",
-  });
+    Pool:""
+   });
   const addStudentMutation = useAddStudentMutation();
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -52,6 +53,7 @@ const StudentProfileForm = () => {
           experience: "",
           fundingNeed: "",
           imageFile: "",
+          Pool:""
         });
       } else {
         alert("Failed to create student profile.");
@@ -145,6 +147,17 @@ const StudentProfileForm = () => {
               value={formData.fundingNeed}
               onChange={handleInputChange}
             />
+              <select
+                  className="font-semibold text-sm w-full mb-2 px-3 py-2 border rounded"
+                 name="Pool"
+                 value={formData.Pool}
+                 onChange={handleInputChange}
+              >
+                <option value="" disabled>Select Student Pool</option>
+                <option value="Website Development">Website Development</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="Generative AI">Generative AI</option>
+              </select>
             <Button type="submit">Create Profile</Button>
           </form>
         </div>

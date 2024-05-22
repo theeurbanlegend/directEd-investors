@@ -19,7 +19,7 @@ const WEBDEV: React.FC = () => {
 
   return (
     <LandingLayout>
-      <div className="h-full flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center w-full"> {/* Changed line */}
         <div className="flex flex-col md:flex-row items-center w-full p-4" ref={detailsRef}>
           <div className="md:w-1/3 text-center md:text-left p-4">
             <div className="flex justify-center p-6">
@@ -67,12 +67,11 @@ const WEBDEV: React.FC = () => {
         >
           <FaArrowAltCircleDown style={{ fontSize: "24px" }} />
         </button>
-
       </div>
 
-      <section ref={profilesRef} className="h-screen flex justify-center items-center">
-        <div className="p-10">
-          <div className="flex flex-row justify-center">
+      <section ref={profilesRef} className="w-full flex justify-center items-center mt-10"> {/* Changed line */}
+        <div className="p-10 w-full"> {/* Changed line */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> {/* Changed line */}
             {isLoading ? (
               <p>Loading...</p>
             ) : isError ? (
