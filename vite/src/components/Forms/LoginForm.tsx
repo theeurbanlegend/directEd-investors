@@ -25,6 +25,19 @@ const AuthButtons = [
   },
 ];
 
+function navigate(url:string){
+window.location.href = url
+}
+
+async function auth() {
+  const response = await fetch('http://127.0.0.1:8080/request',
+  {method:'post'})
+
+  const data = await response.json()
+  console.log("data::",data)
+  navigate(data.url)
+}
+
 export default function Login() {
   const [formValues, setFormValues] = useState({
     email: "",
@@ -33,6 +46,14 @@ export default function Login() {
   const navigate = useNavigate();
   const [isPassVisible, setIsPassVisible] = useState(false);
   const loginMutation = useGetUserMutation();
+
+// const googleAuth = () => {
+//   window.open(
+//     `http://localhost:8080/auth/google/callback`,
+//     "_self"
+//   )
+// }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const { email, password } = formValues;
@@ -101,7 +122,8 @@ export default function Login() {
                   variant="outline"
                   size="sm"
                   className="w-full py-5 px-12"
-                  onClick={() => ({ callbackUrl: "/" })}
+                  // onClick={() => ({ callbackUrl: "/" })}
+                  onClick={() => {auth()}}
                 >
                   <img
                     src={button.icon}
