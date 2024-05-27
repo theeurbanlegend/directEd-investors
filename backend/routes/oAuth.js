@@ -12,25 +12,51 @@ async function getUserData(access_token){
 
 }
 
-router.get('/', async function(req, res, next){
-   const code = req.query.code
-   try{
-    const redirectUrl = 'http://127.0.0.1:8080/oauth';
-    const oAouth2Client = new OAuth2Client (
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    redirectUrl 
-)
-const response = await oAouth2Client.getToken(code)
-await oAouth2Client.setCredentials(res.tokens)   
-console.log('Tokens Acquired')
-const user = oAouth2Client.credentials
-console.log('Credentials:', user)
-await getUserData(user.access_token)
-}
-   catch(err){
-console.log("Error signing in with google")
+router.get('/', async function (req, res, next) {
+   const code = req.query.code;
+   try {
+       const redirectUrl = 'http://127.0.0.1:8080/oauth';
+       const oAuth2Client = new OAuth2Client(
+           process.env.CLIENT_ID,
+           process.env.CLIENT_SECRET,
+           redirectUrl
+       );
+
+       const { tokens } = await oAuth2Client.getToken(code);
+       oAuth2Client.setCredentials(tokens);
+       console.log('Tokens Acquired');
+       console.log('Credentials:', oAuth2Client.credentials);
+
+       await getUserData(tokens.access_token);
+
+       const frontendRedirectUrl = `http://localhost:5173/dashboard?success=true`;
+       res.redirect(frontendRedirectUrl);
+   } catch (err) {
+       console.error('Error during authentication:', err);
+       res.status(500).send('Authentication failed');
    }
-})
+});
+
+// router.get('/oauth', async function(req, res, next){
+//    const code = req.query.code
+//    try{
+//     const redirectUrl = 'http://127.0.0.1:8080/oauth';
+//     const oAouth2Client = new OAuth2Client (
+//     process.env.CLIENT_ID,
+//     process.env.CLIENT_SECRET,
+//     redirectUrl 
+// )
+// const { tokens } = await oAouth2Client.getToken(code)
+// await oAouth2Client.setCredentials(res.tokens)   
+// console.log('Tokens Acquired')
+// const user = oAouth2Client.credentials
+// console.log('Credentials:', user)
+// await getUserData(user.access_token)
+// res.redirect('/dashboard')
+// }
+//    catch(err){
+// console.log("Error signing in with google")
+//    }
+// })
 
 module.exports = router

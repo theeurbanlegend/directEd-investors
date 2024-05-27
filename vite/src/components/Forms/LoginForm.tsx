@@ -13,21 +13,11 @@ const AuthButtons = [
     icon: "/images/google.svg",
     link: "google",
   },
-  {
-    name: "Github",
-    icon: "/images/github.svg",
-    link: "github",
-  },
-  {
-    name: "Apple",
-    icon: "/images/apple.svg",
-    link: "apple",
-  },
 ];
 
-function navigate(url:string){
-window.location.href = url
-}
+// function navigate(url:string){
+// window.location.href = url
+// }
 
 async function auth() {
   const response = await fetch('http://127.0.0.1:8080/request',
@@ -35,7 +25,8 @@ async function auth() {
 
   const data = await response.json()
   console.log("data::",data)
-  navigate(data.url)
+  window.location.href = data.url
+  // navigate(data.url)
 }
 
 export default function Login() {
@@ -123,7 +114,12 @@ export default function Login() {
                   size="sm"
                   className="w-full py-5 px-12"
                   // onClick={() => ({ callbackUrl: "/" })}
-                  onClick={() => {auth()}}
+                  onClick={() => {
+                    auth()
+                        
+                    
+
+                  }}
                 >
                   <img
                     src={button.icon}
