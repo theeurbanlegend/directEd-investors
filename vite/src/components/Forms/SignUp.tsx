@@ -7,6 +7,24 @@ import Gradient from "../../common/gradient";
 import PasswordInput from "../../common/PasswordInput";
 import { useAddUserMutation } from "../../hooks/useAddUserMutation";
 
+const AuthButtons = [
+  {
+    name: "Google",
+    icon: "/images/google.svg",
+    link: "google",
+  },
+];
+
+async function auth() {
+  const response = await fetch('http://127.0.0.1:8080/request',
+  {method:'post'})
+
+  const data = await response.json()
+  console.log("data::",data)
+  window.location.href = data.url
+}
+
+
 const Signup = () => {
   const [formValues, setFormValues] = useState({
     username: "",
@@ -103,6 +121,29 @@ const Signup = () => {
           </form>
 
           <Separator />
+       <p>Or</p>
+          <div className="flex items-center justify-center gap-4 flex-col sm:flex-row w-full">
+              {AuthButtons.map((button, index) => (
+                <Button
+                  key={index + button.name}
+                  variant="outline"
+                  size="sm"
+                  className="w-full py-5 px-12"
+                  onClick={() => {
+                    auth()
+                  }}
+                >
+                  <img
+                    src={button.icon}
+                    width={20}
+                    height={20}
+                    alt={button.name}
+                    className="filter-none dark:filter invert"
+                  />
+                  <p className="ml-5"> Continue with Google</p>
+                </Button>
+              ))}
+            </div>
         </div>
       </div>
     </div>
