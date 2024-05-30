@@ -5,7 +5,7 @@ import {
 	LightningBoltIcon,
 	PersonIcon,
 } from "@radix-ui/react-icons";
-import { Link }from "react-router-dom";
+import { Link, useLocation }from "react-router-dom";
 
 const TopLinks = [
 	{
@@ -49,6 +49,13 @@ const BottomLinks = [
 ];
 
 const Sidebar = () => {
+	const location = useLocation();
+
+	const isActiveLink = (href: string) => {
+	  return location.pathname === href;
+	};
+
+
 	return (
 		<div className="flex flex-col py-3 px-6 h-full w-full justify-between items-start">
 			<div className="flex flex-col items-start gap-12 h-full">
@@ -61,7 +68,7 @@ const Sidebar = () => {
 						<Link to={link.href} key={index}>
 							<div
 								key={index}
-								className="flex items-center gap-3 cursor-pointer hover:underline"
+								className={`flex items-center gap-3 cursor-pointer pr-4 ${isActiveLink(link.href) ? 'bg-[#F1F5F9] text-[#395241] font-semibold border-l border-[#395241] shadow-md' : ''} hover:underline`}
 							>
 								<div>{link.icon}</div>
 								<h2 className="md:text-lg">{link.title}</h2>
