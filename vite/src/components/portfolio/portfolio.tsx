@@ -16,7 +16,7 @@ interface Props {
 
 const PortfolioPage: React.FC<Props> = ({ investments, totalInvestment, tokenBalance }) => {
   return (
-    <div className="flex flex-row justify-center items-center h-screen w-full">
+    <div className="flex flex-row justify-center items-center w-full">
       <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg p-6 w-full">
         <div className="flex flex-col gap-4 w-full">
           {investments.map((investment, index) => (
@@ -37,10 +37,11 @@ const PortfolioPage: React.FC<Props> = ({ investments, totalInvestment, tokenBal
         </div>
         <div className="mt-4">
           <h3 className="text-xl font-semibold mb-2">Investment History</h3>
+          <p className='text-center'>Coming Soon...</p>
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <h3 className="text-xl font-semibold mb-2">Return on Investment (ROI) Tracker</h3>
-        </div>
+        </div> */}
       </div>
     </div>
   );

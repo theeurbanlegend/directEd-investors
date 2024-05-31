@@ -1,16 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { FaCreditCard, FaPaypal, FaBitcoin, FaApplePay } from "react-icons/fa"; // Import icons
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetPoolQuery } from "../../hooks/useGetPoolById";
 import { validateMongoId } from "../../utils";
 import { toast } from "react-toastify";
+import { useUserContext } from "../../context/userContext";
 
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY as string
 );
 
 const CheckoutPage: React.FC = () => {
+  const {id:userId,  getCurrentUser}=useUserContext()
+	
+	useEffect(()=>{
+		getCurrentUser()
+	}, [])
   const toastId= useRef<any>(null)
   const [paymentMethod, setPaymentMethod] = useState("");
   const tokens=localStorage.getItem('tokens')
@@ -29,18 +35,17 @@ const CheckoutPage: React.FC = () => {
       localStorage.setItem("poolId", pool._id);
     }
   }, [isSuccessPool]);
-  const navigate = useNavigate();
   const handleClick = async () => {
     toastId.current = toast.loading('Processing payment...', { autoClose: false });
     const stripe = await stripePromise;
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/checkout/${pool._id}`,
+      `${import.meta.env.VITE_API_URL}/api/checkout/pool/${pool._id}`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ paymentMethod, pool, tokens }),
+        body: JSON.stringify({ paymentMethod, pool, tokens, userId }),
       }
     );
     const session = await response.json()
@@ -49,6 +54,7 @@ const CheckoutPage: React.FC = () => {
     const result = await stripe?.redirectToCheckout({ sessionId: session.id });
     if (result?.error) {
       console.error(result.error.message);
+      toast.error('An error occurred while processing your payment. Please try again later.')
     }
   };
 

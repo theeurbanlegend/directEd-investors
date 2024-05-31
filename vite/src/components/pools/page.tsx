@@ -1,9 +1,42 @@
+import { useEffect, useState } from "react";
 import { useGetPoolsQuery } from "../../hooks/useGetPoolsQuery";
 import LandingLayout from "../portfolio/layout";
 import Cards from "./card/poolCard";
+import PoolCardsLoader from "./card/poolCardLoader";
+import { useGetInvestorDetailsQuery } from "../../hooks/useGetInvestorDetails";
+import { useUserContext } from "../../context/userContext";
 
 const Pools = () => {
-  const { pools, isLoadingPools } = useGetPoolsQuery();
+  const [pools, setPools] = useState<any[] | null>(null);
+  const { pools:loadedPools, isLoadingPools } = useGetPoolsQuery();
+  //get investor details
+  const { id } = useUserContext();
+  const { investor, isErrorInvestor, isLoadingInvestor } =  useGetInvestorDetailsQuery(id as string);
+  useEffect(() => {
+    if (!id) return;
+    const fetchInvestorDetails = async () => {
+      try {
+        if (investor && loadedPools && !isLoadingInvestor && !isErrorInvestor) {
+          const { inv } = investor;
+          const poolsInvested = inv.pools_invested;
+          //add a isInvested property to the pool object
+          const pools = loadedPools.map((pool:any) => {
+            const isInvested = poolsInvested.some(
+              (poolInvested:any) => poolInvested.pool_id?._id.toString() === pool._id.toString()
+            );
+            return {
+              ...pool,
+              isInvested,
+            };
+          });
+          setPools(pools);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchInvestorDetails();
+  }, [id, investor]);
   return (
     <LandingLayout>
       <div className="p-10">
@@ -20,11 +53,19 @@ const Pools = () => {
             investment path waiting for you.
           </p>
         </section>
-        {pools && pools.length > 0 && !isLoadingPools ? (
+        {
+          isLoadingPools ? (
+            <div className="mx-auto p-4">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center max-w-screen-lg mx-auto">
+                <PoolCardsLoader />
+              </div>
+            </div>
+          ) :
+        pools && pools.length > 0 ? (
           <div className="mx-auto p-4">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center max-w-screen-lg mx-auto">
-              {pools.map((pool) => (
-                <Cards key={pool.id} pool={pool} />
+              {pools.map((pool:any) => (
+                <Cards pool={pool} />
               ))}
             </div>
           </div>

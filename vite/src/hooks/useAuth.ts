@@ -15,7 +15,7 @@ const useAuth = () => {
     
     if (accessToken) {
       const decoded = jwtDecode(accessToken) as Payload
-      const { id,name, email,  exp } = decoded
+      const { sub:id,name, email,  exp } = decoded
       const isExpired = exp! < Date.now() / 1000
       return {id, name, email, isExpired};
     }else return null

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../common/button";
 import { Input } from "../../common/input";
 import { Separator } from "../../common/separator";
-import { useGetUserMutation } from "../../hooks/useGetUserQuery";
+import { useGetUserMutation } from "../../hooks/useGetUserMutation";
 import PasswordInput from "../../common/PasswordInput";
 import { toast } from "react-toastify";
 
