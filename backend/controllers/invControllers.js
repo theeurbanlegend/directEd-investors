@@ -22,8 +22,12 @@ const signupHandler=async(req, res)=>{
     if(!investor_name||!investor_email|| !password){
         return res.status(400).json({msg:"Email or password are required"})
     }
+    const userExists=await Investor.findOne({investor_email})
+    if(userExists){
+        return res.status(409).json({msg:"User already exists"})
+    }
     const hashed=await bcrypt.hash(password, 10)
-    const newUser=new Investor({investor_name, investor_email,profile,bio,password:hashed, pools_invested:[] })
+    const newUser=new Investor({investor_name, investor_email,profile,bio,password:hashed, pools_invested:[], investments:[] })
     await newUser.save()
     const accessToken=jwtSign(newUser._id, newUser.investor_name, newUser.investor_email, newUser?.profile[0]?.url)
     return res.status(201).json({"accessToken":accessToken})

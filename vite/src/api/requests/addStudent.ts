@@ -9,5 +9,5 @@ export interface studentInput extends FormData{
 }
 export const addStudent=async(studentData:studentInput)=>{
     const res=await API.post('/api/students/new', studentData)
-    return res.data
+    return {data:res.data,status:res.status}
 }

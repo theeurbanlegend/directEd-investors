@@ -31,7 +31,7 @@ const Header = () => {
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10 w-full my-[40px] md:my-[80px] sm:my-[100px] px-4 md:px-14 xl:px-24 min-h-[50vh]">
                 <div className="flex flex-col items-center lg:items-start gap-6 lg:text-left text-center">
                     <Badge className="py-1 border rounded-lg">
-                        <p className="text-primary font-normal">Take part in the futre</p>
+                        <p className="text-primary font-normal">Take part in the future</p>
                     </Badge>
                     <Title className="text-3xl md:text-6xl">
                         Empowering the Future Workforce
@@ -43,7 +43,7 @@ const Header = () => {
                     </h2>
                     <div className="flex items-center justify-start gap-8 md:flex-row flex-col">
                         <Button>
-                            <Link to="/investments">Invest now</Link>
+                            <Link to="/login">Invest now</Link>
                         </Button>
                     </div>
                 </div>

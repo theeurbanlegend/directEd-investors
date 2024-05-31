@@ -2,6 +2,7 @@ const mongoose=require('mongoose')
 
 const poolSchema= new mongoose.Schema({
     pool_name:{type:String, required:true},
+    pool_slug:{type:String},    
     pool_desc:{type:String},
     pool_target_amnt:{type:String},
     pool_progress:{type:String},
