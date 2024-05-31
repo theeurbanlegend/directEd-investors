@@ -68,7 +68,7 @@ const Sidebar = () => {
 						<Link to={link.href} key={index}>
 							<div
 								key={index}
-								className={`flex items-center gap-3 cursor-pointer pr-4 ${isActiveLink(link.href) ? 'bg-[#F1F5F9] text-[#395241] font-semibold border-l border-[#395241] shadow-md' : ''} hover:underline`}
+								className={`flex items-center gap-3 cursor-pointer px-4 ${isActiveLink(link.href) ? ' text-[#395241] font-semibold border-l border-[#395241] shadow-md' : ''} hover:underline`}
 							>
 								<div>{link.icon}</div>
 								<h2 className="md:text-lg">{link.title}</h2>

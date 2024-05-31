@@ -1,20 +1,46 @@
-import { useRef, useState } from 'react';
-import { useNavigate }from 'react-router-dom';
-// import StudentProfileCard from '../../students/StudentProfileCard';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams }from 'react-router-dom';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
-// import { useQuery } from 'react-query';
-// import { getStudents } from '../../../api/requests/getStudents';
+import { validateMongoId } from '../../../utils';
+import { useGetPoolQuery } from '../../../hooks/useGetPoolById';
+import { toast } from 'react-toastify';
 
 const InvestmentOpportunity = () => {
+  let { id } = useParams();
+  if (!id) {
+    throw new Error("Pool ID is required");
+  }
+  if (validateMongoId(id) === false) {
+    id = localStorage.getItem("poolId") as string;
+  }
+  const { pool, isLoadingPool, isSuccessPool } = useGetPoolQuery({ id });
+  useEffect(() => {
+    //when isSuccess Pool replace href from id to sluf
+    if (isSuccessPool && pool) {
+      window.history.replaceState({}, "", `/pool/${pool.pool_slug}/invest`);
+      localStorage.setItem("poolId", pool._id);
+    }
+  }, [isSuccessPool]);
   const navigate=useNavigate()
-  // const detailsRef = useRef<HTMLDivElement>(null);
-  // const profilesRef = useRef<HTMLDivElement>(null);
-  // const { data: studentsData, isLoading, isError } = useQuery("students", getStudents);
+  const handleNavigate=()=>{
+    if(tokens<500){
+      toast.warning('Minimum investment for this pool is $500') 
+      return
+    }
+    localStorage.setItem('tokens', tokens.toString()) 
+    navigate(`/pool/${pool._id}/invest/checkout`)
+  }
+  const parseProgress = (progress: number) => {
+    // remove comma from pool_target_amnt then calculate amount raised
+    const amountRaised = Number(pool?.pool_target_amnt.replace(/,/g, '')) * (Number(progress) / 100);
+    return `$${amountRaised} raised (${progress}%)`;
+  }
   const opportunity = {
-    description: "Invest in students enrolled in a 15-week intensive tech skills bootcamp. They will learn programming languages, web development, and software engineering fundamentals.",
-    targetAmount: "$50,000",
-    progress: "$20,000 raised (40%)",
+    poolChosen: pool?.pool_name,
+    description: pool?.pool_desc,
+    targetAmount: `$${pool?.pool_target_amnt}`,
+    progress: parseProgress(pool?.pool_progress),
     tokens: "Investors receive 1 token for every $100 invested, redeemable for a percentage of the students' future earnings.",
     minimumInvestment: "$500",
     paymentMethod: "Credit Card (via Stripe)",
@@ -35,20 +61,22 @@ const InvestmentOpportunity = () => {
       <div className="bg-white shadow overflow-hidden sm:rounded-lg w-full max-w-6xl mx-auto">
         <div className="px-4 py-5 sm:px-6 flex items-center justify-start  gap-3">
           <div className='mr-auto'>
-          <label htmlFor="token">Tokens To Invest</label>
+          <label htmlFor="token">Amount To Invest</label>
           <input type="number" className='border p-2 ml-4 border-indigo-200 rounded-full' value={tokens} onChange={tokenchange}/>
          </div>
-
-         <div className="px-4 py-5 sm:px-6">
-          <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={()=>navigate('/pay')}>
-            Invest Now
-          </button>
-        </div>
 
         </div>
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
           <dl className="sm:divide-y sm:divide-gray-200">
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt className="text-sm font-medium text-gray-500">Pool To Invest</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">{opportunity.poolChosen}</dd>
+            </div>
+            <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+              <dt className="text-sm font-medium text-gray-500">Description</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">{opportunity.description}</dd>
+            </div>
             <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4">
               <dt className="text-sm font-medium text-gray-500">Target Amount</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">{opportunity.targetAmount}</dd>
@@ -79,29 +107,9 @@ const InvestmentOpportunity = () => {
             </div>
           </dl>
         </div>
-
-        <div className="px-4 py-5 sm:px-6 ">
-          {/* <h3 className="text-lg font-medium text-gray-900 text-center mb-10">Student Profiles</h3> */}
-          {/* <section ref={profilesRef} className="h-screen flex justify-center items-center">
-                <div className="p-10">
-                    <div className="flex flex-row justify-center">
-                        {isLoading ? (
-                            <p>Loading...</p>
-                        ) : isError ? (
-                            <p>Error fetching data</p>
-                        ) : (
-                            studentsData &&
-                            studentsData.map((student: any, index: number) => (
-                                <StudentProfileCard key={index} student={student} />
-                            ))
-                        )}
-                    </div>
-                </div>
-            </section> */}
-        </div>
         <div className="px-4 py-5 sm:px-6 flex justify-center">
-            <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={() => navigate('/login')}>
-              Sign in to take part in the future
+            <button className="bg-[#395241] text-white font-bold py-4 px-8 rounded focus:outline-none focus:shadow-outline" onClick={handleNavigate}>
+              Checkout
             </button>
           </div>
       </div>

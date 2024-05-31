@@ -25,6 +25,13 @@ const addAttachment = async (req, res, next) => {
     let insertedFileId = new mongoose.mongo.ObjectId();
     const file = req.file;
     const fileBuffer = file.buffer;
+    //check if there is already a file with same filename brgore wirting
+    const fileExists = await gfs.find({ filename: file.originalname }).toArray();
+    if (fileExists.length > 0) {
+      let insertedFileId = fileExists[0]._id;
+      req.body.insertedFileId = insertedFileId;
+      return next();
+    }
     const writeStream = gfs.openUploadStreamWithId(
       insertedFileId,
       file.originalname,
@@ -40,8 +47,6 @@ const addAttachment = async (req, res, next) => {
       return res.status(500).json({ msg: "Internal Server Error" });
     });
     writeStream.on("finish", async () => {
-      console.log("Attachment upload successful!");
-      console.log(insertedFileId);
       req.body.insertedFileId = insertedFileId;
       next();
     });

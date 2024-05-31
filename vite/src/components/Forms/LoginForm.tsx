@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Spinner } from "@radix-ui/themes";
 import Gradient from "../../common/gradient";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../common/button";
@@ -6,6 +7,7 @@ import { Input } from "../../common/input";
 import { Separator } from "../../common/separator";
 import { useGetUserMutation } from "../../hooks/useGetUserQuery";
 import PasswordInput from "../../common/PasswordInput";
+import { toast } from "react-toastify";
 
 const AuthButtons = [
   {
@@ -20,12 +22,13 @@ const AuthButtons = [
 // }
 
 async function auth() {
-  const response = await fetch('http://127.0.0.1:8080/request',
-  {method:'post'})
+  const response = await fetch("http://localhost:8080/request", {
+    method: "post",
+  });
 
-  const data = await response.json()
-  console.log("data::",data)
-  window.location.href = data.url
+  const data = await response.json();
+  console.log("data::", data);
+  window.location.href = data.url;
   // navigate(data.url)
 }
 
@@ -38,12 +41,12 @@ export default function Login() {
   const [isPassVisible, setIsPassVisible] = useState(false);
   const loginMutation = useGetUserMutation();
 
-// const googleAuth = () => {
-//   window.open(
-//     `http://localhost:8080/auth/google/callback`,
-//     "_self"
-//   )
-// }
+  // const googleAuth = () => {
+  //   window.open(
+  //     `http://localhost:8080/auth/google/callback`,
+  //     "_self"
+  //   )
+  // }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -97,9 +100,22 @@ export default function Login() {
                   setFormValues({ ...formValues, email: e.target.value });
                 }}
               />
-              <PasswordInput inputName={'password'} isPassVisible={isPassVisible} value={formValues.password} setIsPassVisible={setIsPassVisible} onChange={(e: { target: { value: any; }; })=>setFormValues({...formValues, password:e.target.value})} placeholder={"Your password"}/>
+              <PasswordInput
+                inputName={"password"}
+                isPassVisible={isPassVisible}
+                value={formValues.password}
+                setIsPassVisible={setIsPassVisible}
+                onChange={(e: { target: { value: any } }) =>
+                  setFormValues({ ...formValues, password: e.target.value })
+                }
+                placeholder={"Your password"}
+              />
               <Button className="w-full" type="submit">
-                Send magic link
+                {loginMutation.isLoading ? (
+                  <Spinner />
+                ) : (
+                  "Send a magic link"
+                )}
               </Button>
             </form>
             <Button variant="link" size="sm" className="w-full">
@@ -115,10 +131,8 @@ export default function Login() {
                   className="w-full py-5 px-12"
                   // onClick={() => ({ callbackUrl: "/" })}
                   onClick={() => {
-                    auth()
-                        
-                    
-
+                    auth();
+                    toast.loading("Redirecting to Google!")
                   }}
                 >
                   <img

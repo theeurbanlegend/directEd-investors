@@ -2,26 +2,32 @@ const bcrypt = require("bcrypt");
 const Student = require("../models/studentSchema");
 const Pool = require("../models/poolSchema");
 const Investor = require("../models/investorSchema");
-const { addAttachment } = require("./attachmentControllers");
 
 const addStudent = async (req, res, next) => {
-  const { name, bio, education, careerGoals, fundingNeed, insertedFileId } =
+  const { name, bio, education, careerGoals, fundingNeed, insertedFileId, pool } =
     req.body;
   if (!name) {
     return res.status(400).json({ msg: "Student name is required" });
   }
   try {
+    //check if student exists
+    const studentExists = await Student.findOne({ name });
+    if (studentExists) {
+      return res.status(409).json({ msg: "Student already exists" });
+    }
     const newStudent = new Student({
       name,
       bio,
       education,
       careerGoals,
       fundingNeed,
-      pools_in: [],
+      pools_in: [pool],
       profile: [{ avatarId: insertedFileId }],
       achievements: [],
     });
     await newStudent.save();
+    //add student to pool
+    await Pool.findByIdAndUpdate(pool, { $push: { students: newStudent._id } });
     return res.status(201).json(newStudent);
   } catch (error) {
     console.log(error);

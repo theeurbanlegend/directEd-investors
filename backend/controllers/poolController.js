@@ -8,7 +8,13 @@ const addPool = async (req, res) => {
         return res.status(400).json({ msg: "Pool name is required" });
     }
     try {
-        const newPool = new Pool({ pool_name, pool_desc, pool_target_amnt, pool_progress:0, pool_extra_desc, students:[] });
+        //check if pool exists
+        const poolExists = await Pool.findOne({ pool_name });
+        if (poolExists) {
+            return res.status(409).json({ msg: "Pool already exists" });
+        }
+        const pool_slug = pool_name.toLowerCase().replace(/ /g, '-');
+        const newPool = new Pool({ pool_name, pool_desc, pool_target_amnt, pool_progress:0, pool_extra_desc, students:[], pool_slug});
         await newPool.save();
         return res.status(201).json(newPool);
     } catch (error) {
@@ -24,7 +30,18 @@ const getPools = async (req, res) => {
         return res.status(500).json({ msg: "Internal server error" });
     }
 };
-
+const getPool = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const pool = await Pool.findById(id).populate('students');
+        if (!pool) {
+            return res.status(404).json({ msg: "Pool not found" });
+        }
+        return res.status(200).json(pool);
+    } catch (error) {
+        return res.status(500).json({ msg: "Internal server error" });
+    }
+}
 const updatePool = async (req, res) => {
     const { id } = req.params;
     const { pool_name, pool_desc, pool_commission_rate} = req.body;
@@ -81,4 +98,4 @@ const deletePool = async (req, res) => {
     }
 };
 
-module.exports = { addPool,addStudentsToPool,  getPools, updatePool, deletePool };
+module.exports = { addPool,addStudentsToPool,  getPools, updatePool, deletePool, getPool };

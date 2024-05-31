@@ -35,7 +35,7 @@ const categories = [
 ];
 
 const valueFormatter = (number: number) =>
-	`$${Intl.NumberFormat("us").format(number).toString()}`;
+	`${Intl.NumberFormat("us").format(number).toString()}`;
 
 export default function LineChartCard() {
 	return (
@@ -44,7 +44,7 @@ export default function LineChartCard() {
 				<Card key={item.title} className="border rounded-lg">
 					<Flex alignItems="start">
 						<Text>{item.title}</Text>
-						<BadgeDelta className="rounded-full text-xs" deltaType={item.deltaType}>{item.delta}</BadgeDelta>
+						<BadgeDelta className="w-fit px-6 rounded-full text-xs text-white" deltaType={item.deltaType}>{item.delta}</BadgeDelta>
 					</Flex>
 					<Flex
 						className="space-x-3 truncate"
@@ -55,14 +55,16 @@ export default function LineChartCard() {
 						<Text>from {item.metricPrev}</Text>
 					</Flex>
 					<AreaChart
-						className="mt-6 h-28 "
+						className="w-full h-32"
 						data={data}
 						index="Month"
 						valueFormatter={valueFormatter}
 						categories={[item.title]}
-						colors={["blue"]}
+						colors={["blue-500", "blue-300", "blue-100"]}
 						showXAxis={true}
+						showAnimation={true}
 						showGridLines={false}
+						showGradient={true}
 						startEndOnly={true}
 						showYAxis={false}
 						showLegend={false}
