@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Props } from "../types";
 import useAuth from "../hooks/useAuth";
 
@@ -7,11 +7,13 @@ interface Profile {
 }
 
 export interface UserContext {
-  name: string;
-  email: string;
+  id: string | null;
+  name: string | null;
+  email: string | null;
   profile: Profile | null;
-  setName: React.Dispatch<React.SetStateAction<string>>;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setId: React.Dispatch<React.SetStateAction<string | null>>;
+  setName: React.Dispatch<React.SetStateAction<string | null>>;
+  setEmail: React.Dispatch<React.SetStateAction<string | null>>;
   setProfile: React.Dispatch<React.SetStateAction<Profile | null>>;
   getCurrentUser: () => void;
 }
@@ -20,21 +22,28 @@ const UserContext = createContext<UserContext | null>(null);
 UserContext.displayName = "UserContext";
 
 function UserProvider(props: Props) {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [id, setId] = useState<string | null >(null); 
+  const [name, setName] = useState<string | null >(null);
+  const [email, setEmail] = useState<string | null >(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const getCurrentUser = () => {
     const userdata = useAuth();
     const { id, name, email, isExpired } = userdata || {};
     setName(name!);
     setEmail(email!);
+    setId(id!);
   };
+  useEffect(()=>{
+    getCurrentUser()
+  }, [])
   const value = useMemo(
     () => ({
       name,
       email,
+      id, 
       profile,
       setName,
+      setId,
       setEmail,
       setProfile,
       getCurrentUser

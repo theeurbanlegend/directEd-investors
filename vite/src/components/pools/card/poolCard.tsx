@@ -23,7 +23,8 @@ interface Pool {
   pool_link: string;
 }
 
-const Cards: React.FC<Pool> = ({ pool }: any) => {
+const Cards = ({ pool }: any) => {
+  console.log(pool);
   const renderCard = ({
     heading1,
     paragraph,
@@ -36,7 +37,7 @@ const Cards: React.FC<Pool> = ({ pool }: any) => {
   }: CardProps) => {
     return (
       <div
-        className="max-w-lg rounded-xl overflow-hidden shadow-lg"
+        className="max-w-lg rounded-xl overflow-hidden shadow-lg flex flex-col items-center"
         key={pool._id}
       >
         <div className="px-6 py-4">
@@ -66,14 +67,15 @@ const Cards: React.FC<Pool> = ({ pool }: any) => {
             {paragraph2}
           </p>
         </div>
-        <div className="px-6 pt-2 pb-2 text-center mb-10">
+        <button disabled={pool?.isInvested} className="px-6 pt-2 pb-2 text-center mb-10">
           <a
             href={Link}
-            className="bg-[#395241] text-[#FDFDFD] text-sm  font-semibold py-2 px-8 rounded-xl mx-auto"
+            className={`${pool?.isInvested? "bg-[#81ad8f]":"bg-[#395241]"} text-[#FDFDFD] text-sm  font-semibold py-2 px-8 rounded-xl mx-auto ${pool?.isInvested? "pointer-events-none":""}`}
+            
           >
-            Invest now
+            {pool?.isInvested ? "Invested" : "Invest Now"}
           </a>
-        </div>
+        </button>
       </div>
     );
   };

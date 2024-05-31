@@ -16,7 +16,7 @@ const Dashboard = () => {
 				<div className="flex items-start justify-start w-full gap-2 flex-col">
 					<h1 className="md:text-4xl">Welcome, {name}</h1>
 					<h2>
-						Have a nice day, and don't forget to drink water! 🥤
+						Don't forget to check out our latest investment opportunities! 
 					</h2>
 				</div>
 				<div className="flex flex-col items-start w-full gap-4">

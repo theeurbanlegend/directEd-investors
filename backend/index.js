@@ -15,7 +15,16 @@ const studentRouter = require('./routes/studentRoutes')
 const poolRouter = require('./routes/poolRoutes')
 const attachmentRouter = require('./routes/attachmentRoutes')
 const checkoutRouter = require('./routes/checkoutRoutes')
-app.use(express.json())
+//use Jon parser for all non-webhook routes
+app.use(
+    (req, res, next) => {
+        if(req.originalUrl === '/api/checkout/webhook'){
+            next()
+        }else{
+            express.json()(req, res, next)
+        }
+    }
+)
 app.use(corsOptions())
 app.use('/oauth', oAuthRouter)
 app.use('/request', requestRouter)
