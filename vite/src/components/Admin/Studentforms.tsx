@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import LandingLayout from "../portfolio/layout";
 import { Button } from "../../common/button";
 import { useAddStudentMutation } from "../../hooks/useAddStudentMutation";
+import { useGetPoolsQuery } from "../../hooks/useGetPoolsQuery";
+import { toast } from "react-toastify";
 
 const StudentProfileForm = () => {
   const [formData, setFormData] = useState({
@@ -12,13 +14,15 @@ const StudentProfileForm = () => {
     experience: "",
     fundingNeed: "",
     imageFile: "",
-    Pool:""
-   });
+    pool: "",
+  });
   const addStudentMutation = useAddStudentMutation();
+  const { pools } = useGetPoolsQuery();
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const toastId = React.useRef<any>(null);
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
@@ -30,6 +34,7 @@ const StudentProfileForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    toastId.current = toast.loading("Creating student profile...");
     try {
       const { imageFile, ...formDataWithoutImage } = formData;
 
@@ -38,13 +43,12 @@ const StudentProfileForm = () => {
       Object.entries(formDataWithoutImage).forEach(([key, value]) => {
         formDataToSend.append(key, value);
       });
-      console.log(formDataToSend);
       const response = await addStudentMutation.mutateAsync({
         studentInput: formDataToSend as any,
       });
-
-      if (response.ok) {
-        alert("Student profile created successfully!");
+      if (response.status === 201) {
+        toast.dismiss(toastId.current);
+        toast.success("Student profile created successfully!");
         setFormData({
           name: "",
           imageUrl: "",
@@ -53,15 +57,15 @@ const StudentProfileForm = () => {
           experience: "",
           fundingNeed: "",
           imageFile: "",
-          Pool:""
+          pool: "",
         });
       } else {
-        alert("Failed to create student profile.");
-      }
+        toast.dismiss(toastId.current);
+        toast.error("Failed to create student profile!");}
     } catch (error) {
       console.error("Error creating student profile:", error);
-      alert("An error occurred. Please try again.");
-    }
+      toast.dismiss(toastId.current);
+      toast.error("Failed to create student profile!");}
   };
 
   return (
@@ -147,17 +151,21 @@ const StudentProfileForm = () => {
               value={formData.fundingNeed}
               onChange={handleInputChange}
             />
-              <select
-                  className="font-semibold text-sm w-full mb-2 px-3 py-2 border rounded"
-                 name="Pool"
-                 value={formData.Pool}
-                 onChange={handleInputChange}
-              >
-                <option value="" disabled>Select Student Pool</option>
-                <option value="Website Development">Website Development</option>
-                <option value="UI/UX Design">UI/UX Design</option>
-                <option value="Generative AI">Generative AI</option>
-              </select>
+            <select
+              className="font-semibold text-sm w-full mb-2 px-3 py-2 border rounded"
+              name="pool"
+              value={formData.pool}
+              onChange={handleInputChange}
+            >
+              <option value="" disabled>
+                Select Pool
+              </option>
+              {pools?.map((pool: any) => (
+                <option key={pool._id} value={pool._id}>
+                  {pool.pool_name}
+                </option>
+              ))}
+            </select>
             <Button type="submit">Create Profile</Button>
           </form>
         </div>

@@ -65,7 +65,7 @@ const DashboardStats = () => {
 				<Card key={item.title} className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
 					<Flex alignItems="start">
 						<Text>{item.title}</Text>
-						<BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
+						<BadgeDelta className="w-fit px-6 rounded-full text-white" deltaType={item.deltaType}>{item.delta}</BadgeDelta>
 					</Flex>
 					<Flex
 						className="space-x-3 truncate"

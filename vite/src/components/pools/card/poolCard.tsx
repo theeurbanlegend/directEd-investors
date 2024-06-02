@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface CardProps {
   heading1: string;
@@ -10,8 +10,21 @@ interface CardProps {
   paragraph2: string;
   Link: string;
 }
+interface Pool {
+  _id: string;
+  pool_name: string;
+  pool_slug: string;
+  pool_desc: string;
+  pool_target_amnt: string;
+  pool_progress: number;
+  pool_token: number;
+  pool_token_value: number;
+  pool_extra_desc: string;
+  pool_link: string;
+}
 
-const Cards: React.FC = () => {
+const Cards = ({ pool }: any) => {
+  console.log(pool);
   const renderCard = ({
     heading1,
     paragraph,
@@ -23,13 +36,24 @@ const Cards: React.FC = () => {
     Link,
   }: CardProps) => {
     return (
-      <div className="max-w-lg rounded-xl overflow-hidden shadow-lg">
+      <div
+        className="max-w-lg rounded-xl overflow-hidden shadow-lg flex flex-col items-center"
+        key={pool._id}
+      >
         <div className="px-6 py-4">
           <div className="font-bold text-lg mb-2 text-center">{heading1}</div>
-          <p className="text-gray-700 italic text-xs mb-4 text-center">{paragraph}</p>
-          <div className="font-semibold text-sm mt-6  mb-2 text-center">{heading2}</div>
-          <p className="text-gray-700 font-semibold text-sm  mb-4 text-center">{fraction}</p>
-          <div className="font-semibold text-sm mt-6  mb-2 text-center">{heading3}</div>
+          <p className="text-gray-700 italic text-xs mb-4 text-center">
+            {paragraph}
+          </p>
+          <div className="font-semibold text-sm mt-6  mb-2 text-center">
+            {heading2}
+          </div>
+          <p className="text-gray-700 font-semibold text-sm  mb-4 text-center">
+            {fraction}
+          </p>
+          <div className="font-semibold text-sm mt-6  mb-2 text-center">
+            {heading3}
+          </div>
           {/* Progress bar */}
           <div className="w-full bg-gray-200 rounded mt-2">
             <div
@@ -39,55 +63,35 @@ const Cards: React.FC = () => {
               {progress}%
             </div>
           </div>
-          <p className="text-gray-700 italic text-xs mb-2 text-center">{paragraph2}</p>
+          <p className="text-gray-700 italic text-xs mb-2 text-center">
+            {paragraph2}
+          </p>
         </div>
-        <div className="px-6 pt-2 pb-2 text-center mb-10">
-          <a href={Link} className="bg-[#395241] text-[#FDFDFD] text-sm  font-semibold py-2 px-8 rounded-xl mx-auto">
-            Invest now
+        <button disabled={pool?.isInvested} className="px-6 pt-2 pb-2 text-center mb-10">
+          <a
+            href={Link}
+            className={`${pool?.isInvested? "bg-[#81ad8f]":"bg-[#395241]"} text-[#FDFDFD] text-sm  font-semibold py-2 px-8 rounded-xl mx-auto ${pool?.isInvested? "pointer-events-none":""}`}
+            
+          >
+            {pool?.isInvested ? "Invested" : "Invest Now"}
           </a>
-        </div>
+        </button>
       </div>
     );
   };
 
   return (
-    <div className="mx-auto p-4">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-center max-w-screen-lg mx-auto">
-        <div className="text-center md:hidden font-bold text-xl">Website Development</div>
-        {renderCard({
-          heading1: "Website Development",
-          paragraph: "Invest in a team of experienced web developers creating modern and responsive websites for businesses and individuals. The team uses the latest technologies and frameworks to deliver high-quality web solutions tailored to client needs.",
-          heading2: "Target Amount",
-          fraction: "$50,000",
-          heading3: "Progress",
-          progress: 20, // Pass the progress percentage here
-          paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "/details/web",
-        })}
-        <div className="text-center mt-10 md:hidden font-bold text-xl">UI/UX Design</div>
-        {renderCard({
-          heading1: "UI/UX Design",
-          paragraph: "Invest in a team of skilled UI/UX designers creating intuitive and visually appealing user interfaces and experiences for digital products. The team conducts extensive user research and employs best design practices to ensure seamless interaction and user satisfaction.",
-          heading2: "Target Amount",
-          fraction: "$100,000",
-          heading3: "Progress",
-          progress: 50, // Pass the progress percentage here
-          paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "/details/ui",
-        })}
-        <div className="text-center mt-10 md:hidden font-bold text-xl">Generative AI</div>
-        {renderCard({
-          heading1: "Generative AI",
-          paragraph: "Invest in research and development of generative artificial intelligence algorithms, which can autonomously create diverse outputs such as images, music, and text. These algorithms have applications in creative industries, content generation, and personalized user experiences.",
-          heading2: "Target Amount",
-          fraction: "$75,000",
-          heading3: "Progress",
-          progress: 80, // Pass the progress percentage here
-          paragraph2: "Investors receive 1 token for every $200 invested, redeemable for a percentage of the entrepreneurs' future earnings.",
-          Link: "/details/ai",
-        })}
-      </div>
-    </div>
+    pool &&
+    renderCard({
+      heading1: pool.pool_name,
+      paragraph: pool.pool_desc,
+      heading2: "Target Amount",
+      fraction: pool.pool_target_amnt,
+      heading3: "Progress",
+      progress: pool.pool_progress, // Pass the progress percentage here
+      paragraph2: pool.pool_extra_desc,
+      Link: `/pool/${pool._id}`,
+    })
   );
 };
 

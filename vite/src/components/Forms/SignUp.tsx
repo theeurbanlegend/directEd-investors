@@ -6,6 +6,25 @@ import { Separator } from "../../common/separator";
 import Gradient from "../../common/gradient";
 import PasswordInput from "../../common/PasswordInput";
 import { useAddUserMutation } from "../../hooks/useAddUserMutation";
+import { Spinner } from "@radix-ui/themes";
+
+const AuthButtons = [
+  {
+    name: "Google",
+    icon: "/images/google.svg",
+    link: "google",
+  },
+];
+
+async function auth() {
+  const response = await fetch("http://127.0.0.1:8080/request", {
+    method: "post",
+  });
+
+  const data = await response.json();
+  console.log("data::", data);
+  window.location.href = data.url;
+}
 
 const Signup = () => {
   const [formValues, setFormValues] = useState({
@@ -15,21 +34,31 @@ const Signup = () => {
     confirmPassword: "",
   });
   const [isPassVisible, setIsPassVisible] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
-  const addUserMutation=useAddUserMutation()
+  const addUserMutation = useAddUserMutation();
 
-  const handleSubmit = async(e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const {username, email, password, confirmPassword}=formValues
-    if(!username || !email || !password || ! confirmPassword || password !==confirmPassword){
-      console.log("Requirements not met!")
-      return
+    const { username, email, password, confirmPassword } = formValues;
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      password !== confirmPassword
+    ) {
+      console.log("Requirements not met!");
+      return;
     }
-    const res=await addUserMutation.mutateAsync({name:username, email, password})
+    const res = await addUserMutation.mutateAsync({
+      name: username,
+      email,
+      password,
+    });
     if (res?.accessToken) {
       localStorage.setItem("vite-access-token", res.accessToken);
       navigate("/dashboard");
@@ -98,11 +127,40 @@ const Signup = () => {
               placeholder={"Confirm password"}
             />
             <Button className="w-full" type="submit">
-              Sign up
+              {
+                addUserMutation.isLoading ? (
+                  <Spinner />
+                ) : (
+                  "Sign up"
+                )
+              }
             </Button>
           </form>
 
           <Separator />
+          <p>Or</p>
+          <div className="flex items-center justify-center gap-4 flex-col sm:flex-row w-full">
+            {AuthButtons.map((button, index) => (
+              <Button
+                key={index + button.name}
+                variant="outline"
+                size="sm"
+                className="w-full py-5 px-12"
+                onClick={() => {
+                  auth();
+                }}
+              >
+                <img
+                  src={button.icon}
+                  width={20}
+                  height={20}
+                  alt={button.name}
+                  className="filter-none dark:filter invert"
+                />
+                <p className="ml-5"> Continue with Google</p>
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

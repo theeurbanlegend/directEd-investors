@@ -1,9 +1,10 @@
-const { getPools, addPool, updatePool, deletePool } = require('../controllers/poolController')
+const { getPools, addPool, updatePool, deletePool, getPool } = require('../controllers/poolController')
 
 const router=require('express').Router()
 
 
 router.get('', getPools)
+router.get('/:id', getPool)
 router.post('/new', addPool)
 router.post('/:id/update', updatePool)
 router.post('/:id/delete', deletePool)
