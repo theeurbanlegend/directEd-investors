@@ -3,13 +3,24 @@ const router = require('express').Router()
 const dotenv = require('dotenv')
 dotenv.config()
 const {OAuth2Client} = require('google-auth-library')
+const Investor = require("../models/investorSchema");
 
-async function getUserData(access_token){
-   
-    const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token${access_token}`)
-    const data = await response.json()
-    console.log('data:', data)
 
+
+async function getUserData(access_token) {
+    try {
+        console.log('Access Token:', access_token); // Log the access token
+        const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`);
+        console.log('Response Status:', response.status); // Log the response status
+        const responseText = await response.text();
+        console.log('Response Text:', responseText); // Log the response text
+        if (!response.ok) throw new Error(`Failed to fetch user data: ${responseText}`);
+        const data = JSON.parse(responseText);
+        console.log('data:', data);
+        return data;
+    } catch (err) {
+        console.error('Error fetching user data:', err);
+    }
 }
 
 router.get('/', async function (req, res, next) {
@@ -27,7 +38,31 @@ router.get('/', async function (req, res, next) {
        console.log('Tokens Acquired');
        console.log('Credentials:', oAuth2Client.credentials);
 
-       await getUserData(tokens.access_token);
+     const userData =  await getUserData(tokens.access_token);
+     console.log('User Data:', userData);
+
+     let investor = await Investor.findOne({ investor_email: userData.email });
+     if (!investor) {
+         // Create a new investor
+         investor = new Investor({
+             investor_name: userData.given_name,
+             investor_email: userData.email,
+             profile: [{ url: userData.picture }],
+             bio: '',  // Set a default or empty bio
+             password: '',  // Not used in OAuth, can be set to null or empty
+             pools_invested: [],
+             investments: []
+         });
+
+         await investor.save()
+             .then(() => console.log('New investor created:', investor))
+             .catch((err) => {
+                 console.error('Error saving new investor:', err);
+                 throw err;
+             });
+     } else {
+         console.log('Investor already exists:', investor);
+     }
 
        const frontendRedirectUrl = `http://localhost:5173/dashboard?success=true`;
        res.redirect(frontendRedirectUrl);

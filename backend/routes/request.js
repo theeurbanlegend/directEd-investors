@@ -18,7 +18,7 @@ router.post('/', async function(req, res, next){
 
 const authorizeUrl = oAouth2Client.generateAuthUrl({
 access_type:'offline',
-scope:'https://www.googleapis.com/auth/userinfo.profile openid',
+scope:'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email openid',
 prompt:'consent'
 })
 res.json({url:authorizeUrl})
