@@ -64,7 +64,8 @@ router.get('/', async function (req, res, next) {
          console.log('Investor already exists:', investor);
      }
 
-       const frontendRedirectUrl = `http://localhost:5173/dashboard?success=true`;
+    //    const frontendRedirectUrl = `http://localhost:5173/dashboard?success=true`;
+    const frontendRedirectUrl = `http://localhost:5173/dashboard?name=${encodeURIComponent(userData.given_name)}&email=${encodeURIComponent(userData.email)}&picture=${encodeURIComponent(userData.picture)}`;
        res.redirect(frontendRedirectUrl);
    } catch (err) {
        console.error('Error during authentication:', err);

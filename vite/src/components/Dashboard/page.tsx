@@ -2,11 +2,29 @@ import { useEffect } from "react";
 import DashboardStats from "../../common/DashboardState";
 import { useUserContext } from "../../context/userContext";
 import LandingLayout from "../portfolio/layout";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
-	const {name, getCurrentUser}=useUserContext()
 	
-	useEffect(()=>{
+	const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+	const { setName, setEmail, setProfile, name, getCurrentUser } = useUserContext();
+    // const {getCurrentUser}=useUserContext()
+
+	useEffect(() => {
+        const name = queryParams.get('name');
+        const email = queryParams.get('email');
+        const picture = queryParams.get('picture');
+
+        if (name && email && picture) {
+            setName(name);
+            setEmail(email);
+            setProfile({ url: picture });
+        }
+    }, [queryParams, setName, setEmail, setProfile]);
+
+useEffect(()=>{
 		getCurrentUser()
 	}, [])
 	return (

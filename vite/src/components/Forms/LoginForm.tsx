@@ -17,9 +17,6 @@ const AuthButtons = [
   },
 ];
 
-// function navigate(url:string){
-// window.location.href = url
-// }
 
 async function auth() {
   const response = await fetch("http://localhost:8080/request", {
@@ -41,12 +38,6 @@ export default function Login() {
   const [isPassVisible, setIsPassVisible] = useState(false);
   const loginMutation = useGetUserMutation();
 
-  // const googleAuth = () => {
-  //   window.open(
-  //     `http://localhost:8080/auth/google/callback`,
-  //     "_self"
-  //   )
-  // }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
