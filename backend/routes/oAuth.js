@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const {OAuth2Client} = require('google-auth-library')
 const Investor = require("../models/investorSchema");
+const Investment = require("../models/investmentSchema");
 
 
 
@@ -41,15 +42,18 @@ router.get('/', async function (req, res, next) {
      const userData =  await getUserData(tokens.access_token);
      console.log('User Data:', userData);
 
-     let investor = await Investor.findOne({ investor_email: userData.email });
+     let investor = await Investor.findOne({ investor_email: userData.email })
+     .populate("investments")
+     .populate("pools_invested.pool_id")
+     .populate("pools_invested.students_selected");;
      if (!investor) {
          // Create a new investor
          investor = new Investor({
              investor_name: userData.given_name,
              investor_email: userData.email,
              profile: [{ url: userData.picture }],
-             bio: '',  // Set a default or empty bio
-             password: '',  // Not used in OAuth, can be set to null or empty
+             bio: '',  
+             password: '', 
              pools_invested: [],
              investments: []
          });
