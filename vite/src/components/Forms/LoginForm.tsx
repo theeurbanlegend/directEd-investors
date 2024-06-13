@@ -133,6 +133,7 @@ export default function Login() {
                     alt={button.name}
                     className="filter-none dark:filter invert"
                   />
+                <span className="ml-4"> Continue with Google</span> 
                 </Button>
               ))}
             </div>

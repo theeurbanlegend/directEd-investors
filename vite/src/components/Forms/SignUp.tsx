@@ -157,7 +157,8 @@ const Signup = () => {
                   alt={button.name}
                   className="filter-none dark:filter invert"
                 />
-                <p className="ml-5"> Continue with Google</p>
+                               <span className="ml-4"> Sign In with Google</span> 
+
               </Button>
             ))}
           </div>
