@@ -66,18 +66,20 @@ export default function Login() {
     }
   
     try {
-      const response = await fetch("http://localhost:8080/forgot-password", {
+      const response = await fetch("http://localhost:8080/api/inv/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: forgotPasswordEmail }),
       });
+
+      const data = await response.json();
   
       if (response.ok) {
         toast.success("Password reset link has been sent to your email.");
       } else {
-        toast.error("Failed to send password reset link. Please try again.");
+        toast.error(data.message);
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");
