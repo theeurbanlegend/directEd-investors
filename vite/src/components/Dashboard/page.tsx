@@ -5,27 +5,17 @@ import LandingLayout from "../portfolio/layout";
 import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
-	
 	const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-
-	const { setName, setEmail, setProfile, name, getCurrentUser } = useUserContext();
-    // const {getCurrentUser}=useUserContext()
-
-	useEffect(() => {
-        const name = queryParams.get('name');
-        const email = queryParams.get('email');
-        const picture = queryParams.get('picture');
-
-        if (name && email && picture) {
-            setName(name);
-            setEmail(email);
-            setProfile({ url: picture });
+	  const queryParams = new URLSearchParams(location.search);
+	  const {name, getCurrentUser}=useUserContext()
+	
+	useEffect(()=>{
+		const accessToken = queryParams.get('token');
+   
+		if (accessToken) {
+            localStorage.setItem('vite-access-token', accessToken);
         }
-    }, [queryParams, setName, setEmail, setProfile]);
-
-useEffect(()=>{
-		getCurrentUser()
+          getCurrentUser()
 	}, [])
 	return (
         <LandingLayout>
