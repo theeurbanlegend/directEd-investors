@@ -20,7 +20,7 @@ const sampleSubscription = {
 };
 
 const Profile = () => {
-	const { name, email, getCurrentUser } = useUserContext()
+	const { name, email, profile, getCurrentUser } = useUserContext()
 
 	useEffect(() => {
 		getCurrentUser()
@@ -29,6 +29,8 @@ const Profile = () => {
 	const user = sampleUser;
 	const subscription = sampleSubscription;
 
+	const profileImage = profile?.url || sampleUser.image;
+
 	return (
 		<LandingLayout>
 			<div className="flex flex-col items-center justify-center h-full">
@@ -36,7 +38,7 @@ const Profile = () => {
 					<div className="flex flex-col items-center gap-4">
 						{user?.image && (
 							<img
-								src={user.image}
+								src={profileImage}
 								width={110}
 								height={110}
 								alt=""

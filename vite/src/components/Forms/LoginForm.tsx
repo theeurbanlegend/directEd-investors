@@ -52,6 +52,41 @@ export default function Login() {
     }
   };
 
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+        const openModal = () => setIsModalOpen(true);
+        const closeModal = () => setIsModalOpen(false);
+
+  const handleForgotPassword = async (e: any) => {
+    e.preventDefault();
+    if (!forgotPasswordEmail) {
+      toast.error("Please enter your email address.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:8080/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: forgotPasswordEmail }),
+      });
+  
+      if (response.ok) {
+        toast.success("Password reset link has been sent to your email.");
+      } else {
+        toast.error("Failed to send password reset link. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    }
+  };
+  
+
+
+
   return (
     <div className="flex items-start w-full h-screen flex-col relative overflow-hidden">
       <Gradient className="dark:blur-[200px]" />
@@ -109,9 +144,26 @@ export default function Login() {
                 )}
               </Button>
             </form>
-            <Button variant="link" size="sm" className="w-full">
+            <Button variant="link" size="sm" className="w-full" onClick={openModal}>
               Forgot password?
             </Button>
+
+{isModalOpen && (
+  <div className="modal">
+    <div className="modal-content">
+      <span className="close cursor-pointer" onClick={closeModal}>&times;</span>
+      <form onSubmit={handleForgotPassword}>
+        <Input
+          placeholder="Enter your email address"
+          type="email"
+          value={forgotPasswordEmail}
+          onChange={(e) => setForgotPasswordEmail(e.target.value)}
+        />
+        <Button className="my-2" type="submit">Send Reset Link</Button>
+      </form>
+    </div>
+  </div>
+)}
             <Separator />
             <div className="flex items-center justify-center gap-4 flex-col sm:flex-row w-full">
               {AuthButtons.map((button, index) => (
