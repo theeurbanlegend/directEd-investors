@@ -41,7 +41,14 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen c">
+      <div className='mb-20'> <a href="/" className="font-bold md:text-2xl">
+          <img
+            src="/images/directEd-horizontal.png"
+            width={"200px"}
+            alt="DirectEd logo"
+          />
+        </a></div>
       <div className="max-w-md w-full px-6">
         <h2 className="text-3xl font-bold mb-6">Reset Your Password</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
