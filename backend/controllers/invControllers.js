@@ -154,13 +154,17 @@ const getInvestorDetails = async (req, res) => {
   return res.status(200).json({ inv: investor });
 };
 
+const email = process.env.EMAIL;
+const emailPassword = process.env.EMAIL_PASSWORD;
+
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASSWORD,
+    user: email,
+    pass: emailPassword
   },
 });
+
 
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
@@ -185,10 +189,12 @@ const forgotPassword = async (req, res) => {
       to: investor.investor_email,
       from: process.env.EMAIL,
       subject: 'Password Reset',
-      text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
-      Please click on the following link, or paste this into your browser to complete the process:\n\n
-     http://localhost:5173/reset-password/${resetToken}\n\n
-      If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+      html: `
+      <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
+      <p>Please click on the following link, or paste this into your browser to complete the process:</p>
+      <p><a href=" http://localhost:5173/reset-password/${resetToken}">Reset Password</a></p>
+      <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+    `,
     };
 
     await transporter.sendMail(mailOptions, function(err, data) {
