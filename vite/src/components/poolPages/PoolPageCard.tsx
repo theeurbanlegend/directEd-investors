@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LandingLayout from "../portfolio/layout";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -9,6 +9,9 @@ import { validateMongoId } from "../../utils";
 const PoolPageCard: React.FC = () => {
   const detailsRef = useRef<HTMLDivElement>(null);
   const profilesRef = useRef<HTMLDivElement>(null);
+  const [showInvestButton, setShowInvestButton] = useState(true);
+  const [showStudentProfiles, setShowStudentProfiles] = useState(false);
+  const [showInvestmentOpportunity, setShowInvestmentOpportunity] = useState(true); // Set initial state to true or false as per your requirement
   let { id } = useParams();
   if (!id) {
     throw new Error("Pool ID is required");
@@ -18,16 +21,24 @@ const PoolPageCard: React.FC = () => {
   }
   const { pool, isLoadingPool, isSuccessPool } = useGetPoolQuery({ id });
   useEffect(() => {
-    //when isSuccess Pool replace href from id to sluf
+    // when isSuccess Pool replace href from id to slug
     if (isSuccessPool && pool) {
       window.history.replaceState({}, "", `/pool/${pool.pool_slug}`);
       localStorage.setItem("poolId", pool._id);
     }
   }, [isSuccessPool]);
+  
+  const scrollToDetails = () => {
+    if (detailsRef.current) {
+      detailsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const scrollToStudentProfiles = () => {
     if (profilesRef.current) {
       profilesRef.current.scrollIntoView({ behavior: "smooth" });
     }
+    setShowStudentProfiles(true);
   };
 
   return (
@@ -79,23 +90,25 @@ const PoolPageCard: React.FC = () => {
                 </p>
               </section>
 
-              <section className="my-8 text-center">
-                <h2 className="text-2xl font-bold mb-4">
-                  Investment Opportunity
-                </h2>
-                <p className="text-lg mb-4">
-                  Investing in the development of generative AI technologies
-                  offers an opportunity to leverage the power of AI for creative
-                  and innovative purposes. By supporting research and education
-                  in this field, investors can contribute to the advancement of
-                  AI-driven creativity and innovation.
-                </p>
-              </section>
+              {showInvestmentOpportunity && (
+                <section className="my-8 text-center">
+                  <h2 className="text-2xl font-bold mb-4">
+                    Investment Opportunity
+                  </h2>
+                  <p className="text-lg mb-4">
+                    Investing in the development of generative AI technologies
+                    offers an opportunity to leverage the power of AI for creative
+                    and innovative purposes. By supporting research and education
+                    in this field, investors can contribute to the advancement of
+                    AI-driven creativity and innovation.
+                  </p>
+                </section>
+              )}
             </div>
           </div>
 
           <button
-            className="mt-10 flex justify-center items-center"
+            className="mt-10 flex justify-center items-center relative"
             style={{
               padding: "10px",
               backgroundColor: "transparent",
@@ -106,18 +119,44 @@ const PoolPageCard: React.FC = () => {
               width: "40px",
               height: "40px",
             }}
-            onClick={scrollToStudentProfiles}
+            onClick={scrollToDetails}
           >
             <FaArrowAltCircleDown style={{ fontSize: "24px" }} />
           </button>
 
+          <div className="flex justify-center items-center mt-6 gap-6">
+            <a
+              href="#"
+              className={`px-6 py-2 text-sm font-semibold rounded-xl border border-gray-400 hover:bg-gray-100 ${showStudentProfiles ? "" : "bg-gray-100"}`}
+              onClick={() => {
+                setShowStudentProfiles(false);
+                setShowInvestButton(true);
+                setShowInvestmentOpportunity(true); // Ensure InvestmentOpportunity is visible when switching tabs
+              }}
+            >
+              Investment
+            </a>
+            <a
+              href="#"
+              className={`px-6 py-2 text-sm font-semibold rounded-xl border border-gray-400 hover:bg-gray-100 ${showStudentProfiles ? "bg-gray-100" : ""}`}
+              onClick={() => {
+                setShowStudentProfiles(true);
+                setShowInvestmentOpportunity(false); // Hide InvestmentOpportunity when switching tabs
+              }}
+            >
+              Student Profiles
+            </a>
+          </div>
+
           <section
             ref={profilesRef}
-            className="w-full flex justify-center items-center mt-10"
+            className={`w-full flex justify-center items-center mt-10 ${
+              showStudentProfiles ? "block" : "hidden"
+            }`}
           >
             <div className="p-10 w-full">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {pool.students.length > 0 ? (
+                {showStudentProfiles && pool.students.length > 0 ? (
                   pool.students.map((student: any, index: number) => (
                     <StudentProfileCard key={index} student={student} />
                   ))
@@ -125,18 +164,12 @@ const PoolPageCard: React.FC = () => {
                   <p className="w-full text-center col-span-3">
                     No students for this pool yet!
                   </p>
+               
+
                 )}
               </div>
             </div>
           </section>
-          <div className="px-6 pt-2 pb-2 text-center mb-10">
-            <a
-              href={`/pool/${pool._id}/invest`}
-              className="bg-[#395241] text-[#FDFDFD] text-sm  font-semibold py-2 px-8 rounded-xl mx-auto"
-            >
-              Invest now
-            </a>
-          </div>
         </div>
       )}
     </LandingLayout>

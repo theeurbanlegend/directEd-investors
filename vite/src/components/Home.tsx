@@ -4,8 +4,6 @@ import { Badge } from "@tremor/react";
 import Title from "../common/Title";
 import { Button } from "../common/button";
 import Navbar from "./Navbar";
-import LineChartCard from "./charts/LineChartCard";
-import SalesCard from "./charts/SalesCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
@@ -27,7 +25,6 @@ const Header = () => {
             }}
         >
             <Navbar />
-            {/* <Gradient className="w-[100%] dark:block hidden" /> */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-10 w-full my-[40px] md:my-[80px] sm:my-[100px] px-4 md:px-14 xl:px-24 min-h-[50vh]">
                 <div className="flex flex-col items-center lg:items-start gap-6 lg:text-left text-center">
                     <Badge className="py-1 border rounded-lg">
@@ -38,7 +35,6 @@ const Header = () => {
                     </Title>
                     <h2 className="md:text-lg">
                         By equipping students with in-demand digital skills, DirectEd empowers them to contribute to Africa's {" "}
-                        <br className="md:block hidden" />
                         technological and economic growth.
                     </h2>
                     <div className="flex items-center justify-start gap-8 md:flex-row flex-col">
@@ -49,15 +45,15 @@ const Header = () => {
                 </div>
                 <div className="w-[100%] md:w-[80%] lg:w-[50%] flex gap-4 items-center relative lg:flex-row flex-col">
                     <div className="lg:w-[50%] z-10 w-[100%]">
-                        <LineChartCard />
+                        <img src="/Raay.jpg" alt="Chart" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
                     </div>
                     <div className="w-[50%] hidden flex-row lg:flex-col gap-4 lg:flex">
-                        <SalesCard />
-                        <SalesCard />
+                        <img src="/Raay.jpg" alt="Sales 1" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
+                        <img src="/Raay.jpg" alt="Sales 2" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </motion.div>
     );
 };
