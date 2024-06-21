@@ -91,7 +91,8 @@ router.get('/', async function (req, res, next) {
               investor._id,
               investor.investor_name,
               investor.investor_email,
-              investor.profile
+              investor.profile,
+              investor.role
         );
         console.log("JWT:", accessToken)
 

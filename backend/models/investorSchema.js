@@ -10,7 +10,8 @@ const investorSchema= new mongoose.Schema({
         pool_id:{type:mongoose.Types.ObjectId, ref:'Pool'},
         students_selected:[{type:mongoose.Types.ObjectId, ref:'Student'}]
     }],
-    investments:[{type:mongoose.Types.ObjectId, ref:'Investment'}]
+    investments:[{type:mongoose.Types.ObjectId, ref:'Investment'}],
+    role: { type: String, enum: ['investor', 'admin'], default: 'investor' }
 })
 const Investor=mongoose.model('Investor', investorSchema)
 module.exports=Investor
