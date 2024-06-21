@@ -19,6 +19,7 @@ import { Bounce, ToastContainer } from "react-toastify";
 import PoolPageCard from "./components/poolPages/PoolPageCard";
 import CheckoutSuccess from "./components/checkout/CheckoutSuccess";
 import CheckoutCancel from "./components/checkout/CheckoutCancel";
+import ResetPassword from "./components/Forms/resetPasswordForm";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<Signup />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/pools" element={<Pools />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/dashboard" element={<Dashboard />} />

@@ -2,12 +2,20 @@ import { useEffect } from "react";
 import DashboardStats from "../../common/DashboardState";
 import { useUserContext } from "../../context/userContext";
 import LandingLayout from "../portfolio/layout";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
-	const {name, getCurrentUser}=useUserContext()
+	const location = useLocation();
+	  const queryParams = new URLSearchParams(location.search);
+	  const {name, getCurrentUser}=useUserContext()
 	
 	useEffect(()=>{
-		getCurrentUser()
+		const accessToken = queryParams.get('token');
+   
+		if (accessToken) {
+            localStorage.setItem('vite-access-token', accessToken);
+        }
+          getCurrentUser()
 	}, [])
 	return (
         <LandingLayout>

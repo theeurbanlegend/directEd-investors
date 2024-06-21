@@ -1,37 +1,38 @@
 import {
-	DashboardIcon,
-	EnvelopeClosedIcon,
 	GearIcon,
-	LightningBoltIcon,
 	PersonIcon,
 } from "@radix-ui/react-icons";
+import { RiBriefcaseLine,  RiCoinsLine} from "react-icons/ri";
+import { RxDashboard } from "react-icons/rx";
+import { IoBulbOutline} from "react-icons/io5"
+import { FaPen } from "react-icons/fa";
 import { Link, useLocation }from "react-router-dom";
 
 const TopLinks = [
 	{
 		title: "Dashboard",
 		href: "/dashboard",
-		icon: <DashboardIcon />,
+		icon: <RxDashboard />,
 	},
 	{
 		title: "Portfolio",
 		href: "/portfolio",
-		icon: <DashboardIcon />,
+		icon: <RiBriefcaseLine />,
 	},
 	{
 		title: "Pools",
 		href: "/pools",
-		icon: <EnvelopeClosedIcon />,
+		icon: < RiCoinsLine/>,
 	},
 	{
 		title: "Analytics",
 		href: "#",
-		icon: <LightningBoltIcon />,
+		icon: <IoBulbOutline/>,
 	},
 	{
 		title: "Create",
 		href: "/create",
-		icon: <LightningBoltIcon />,
+		icon: <FaPen />,
 	},
 ];
 
@@ -58,17 +59,18 @@ const Sidebar = () => {
 
 	return (
 		<div className="flex flex-col py-3 px-6 h-full w-full justify-between items-start">
-			<div className="flex flex-col items-start gap-12 h-full">
+			<div className="flex flex-col items-start gap-12 h-full w-full">
 				<Link to="/">
 				<img src="/images/directEd-horizontal.png" 
 					width={'200px'} alt="DirectEd logo"/>
 				</Link>
 				<div className="flex flex-col items-start gap-6 ">
 					{TopLinks.map((link, index) => (
-						<Link to={link.href} key={index}>
+						<Link to={link.href} key={index} className="w-full">
 							<div
 								key={index}
-								className={`flex items-center gap-3 cursor-pointer px-4 ${isActiveLink(link.href) ? ' text-[#395241] font-semibold border-l border-[#395241] shadow-md' : ''} hover:underline`}
+								className={`flex items-center gap-3 cursor-pointer px-4 ${isActiveLink(link.href) ? 'text-[#395241] font-semibold border-l border-[#395241] shadow-md' : ''} 
+								hover:shadow-sm`}
 							>
 								<div>{link.icon}</div>
 								<h2 className="md:text-lg">{link.title}</h2>
@@ -80,7 +82,7 @@ const Sidebar = () => {
 			<div className="flex flex-col items-start gap-6">
 				{BottomLinks.map((link, index) => (
 					<Link to={link.href} key={index}>
-						<div className="flex items-center gap-3 cursor-pointer hover:underline">
+						<div className="flex items-center gap-3 cursor-pointer px-4">
 							<div>{link.icon}</div>
 							<h2 className="md:text-lg">{link.title}</h2>
 						</div>
