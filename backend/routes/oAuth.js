@@ -59,6 +59,7 @@ router.get('/', async function (req, res, next) {
                 password: '',
                 pools_invested: [],
                 investments: [],
+                role,
                 google_access_token: tokens.access_token,
                 google_refresh_token: tokens.refresh_token
             });

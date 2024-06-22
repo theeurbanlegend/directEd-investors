@@ -37,6 +37,8 @@ function UserProvider(props: Props) {
     setEmail(email!);
     setId(id!);
     setRole(role!)
+    console.log(userdata);
+    
   };
   useEffect(()=>{
     getCurrentUser()
