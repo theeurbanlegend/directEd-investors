@@ -4,7 +4,7 @@ const jwtSign = require("../auth/jwtSign");
 const nodemailer = require('nodemailer');
 const Investment = require("../models/investmentSchema");
 const jwt=require('jsonwebtoken')
-
+const Transaction = require("../models/transactionSchema");
 const loginHandler = async (req, res) => {
   const { investor_email, password } = req.body;
   if (!investor_email || !password) {
@@ -140,14 +140,25 @@ const addInvestment = async (
     pool_id: pool_id,
     students_selected: [],
   });
+  const txn = new Transaction({
+    transactor: investor_id,
+    transaction_type: `Investment on ${pool_id}`,
+    transaction_amount: amount_total,
+    transaction_status: "success",
+    transaction_balance: amount_total,
+  });
+  await txn.save();
+  investor.transactions.push(txn._id);
   await investor.save();
+  //save txn
 };
 const getInvestorDetails = async (req, res) => {
   const { id } = req.params;
   const investor = await Investor.findById(id)
     .populate("investments")
     .populate("pools_invested.pool_id")
-    .populate("pools_invested.students_selected");
+    .populate("pools_invested.students_selected")
+    .populate("transactions");
   if (!investor) {
     return res.status(404).json({ msg: "Investor not found" });
   }
@@ -261,4 +272,3 @@ module.exports = {
   resetPassword
 };
 
-// DirectEdDevelopment1

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import LandingLayout from "../portfolio/layout";
 import { FaArrowAltCircleDown } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetPoolQuery } from "../../hooks/useGetPoolById";
 import StudentProfileCard from "../students/StudentProfileCard";
 import { validateMongoId } from "../../utils";
@@ -13,6 +13,7 @@ const PoolPageCard: React.FC = () => {
   const [showStudentProfiles, setShowStudentProfiles] = useState(false);
   const [showInvestmentOpportunity, setShowInvestmentOpportunity] = useState(true); // Set initial state to true or false as per your requirement
   let { id } = useParams();
+  const navigate = useNavigate();
   if (!id) {
     throw new Error("Pool ID is required");
   }
@@ -27,7 +28,9 @@ const PoolPageCard: React.FC = () => {
       localStorage.setItem("poolId", pool._id);
     }
   }, [isSuccessPool]);
-  
+  const handleInvest = () => {
+    navigate(`/pool/${id}/invest`);
+  }
   const scrollToDetails = () => {
     if (detailsRef.current) {
       detailsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -170,6 +173,16 @@ const PoolPageCard: React.FC = () => {
               </div>
             </div>
           </section>
+          <div>
+            {showInvestButton && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
+                onClick={handleInvest}
+              >
+                Invest Now
+              </button>
+            )}
+          </div>
         </div>
       )}
     </LandingLayout>
