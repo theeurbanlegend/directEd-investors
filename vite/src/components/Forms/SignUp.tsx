@@ -7,6 +7,7 @@ import Gradient from "../../common/gradient";
 import PasswordInput from "../../common/PasswordInput";
 import { useAddUserMutation } from "../../hooks/useAddUserMutation";
 import { Spinner } from "@radix-ui/themes";
+import { baseURL } from "../../api/api";
 
 const AuthButtons = [
   {
@@ -17,7 +18,7 @@ const AuthButtons = [
 ];
 
 async function auth() {
-  const response = await fetch("http://127.0.0.1:8080/request", {
+  const response = await fetch(`${baseURL}/request`, {
     method: "post",
   });
 

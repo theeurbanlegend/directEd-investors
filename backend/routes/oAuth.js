@@ -29,7 +29,7 @@ async function getUserData(access_token) {
 router.get('/', async function (req, res, next) {
     const code = req.query.code;
     try {
-        const redirectUrl = 'http://127.0.0.1:8080/oauth';
+        const redirectUrl = `${process.env.FRONTEND_URL}/oauth`;
         const oAuth2Client = new OAuth2Client(
             process.env.CLIENT_ID,
             process.env.CLIENT_SECRET,
