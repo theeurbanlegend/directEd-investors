@@ -47,7 +47,7 @@ const signupHandler = async (req, res) => {
     password: hashed,
     pools_invested: [],
     investments: [],
-    role
+    role:'investor',
   });
   await newUser.save();
   const accessToken = jwtSign(
