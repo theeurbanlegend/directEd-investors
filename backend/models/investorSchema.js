@@ -11,6 +11,7 @@ const investorSchema= new mongoose.Schema({
         students_selected:[{type:mongoose.Types.ObjectId, ref:'Student'}]
     }],
     investments:[{type:mongoose.Types.ObjectId, ref:'Investment'}],
+    transactions:[{type:mongoose.Types.ObjectId, ref:'Transaction'}],
     role: { type: String, enum: ['investor', 'admin'], default: 'investor' }
 })
 const Investor=mongoose.model('Investor', investorSchema)
