@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseURL = 'https://directed-investors-platform.onrender.com'
+export const baseURL = 'https://directed-investors.onrender.com'
 
 const API = axios.create({
 	baseURL,timeout:5000
