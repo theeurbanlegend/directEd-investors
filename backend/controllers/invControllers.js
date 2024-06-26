@@ -8,7 +8,7 @@ const Transaction = require("../models/transactionSchema");
 const loginHandler = async (req, res) => {
   const { investor_email, password } = req.body;
   if (!investor_email || !password) {
-    return res.status(400).json({ msg: "Email or passowrd are required" });
+    return res.status(400).json({ msg: "Email or password are required" });
   }
   const loginUser = await Investor.findOne({ investor_email })
     .populate("investments")
@@ -24,7 +24,8 @@ const loginHandler = async (req, res) => {
     loginUser._id,
     loginUser.investor_name,
     loginUser.investor_email,
-    loginUser?.profile[0]?.url
+    loginUser?.profile[0]?.url,
+    loginUser?.role
   );
   return res.status(200).json({ accessToken: accessToken, inv: loginUser });
 };
@@ -46,13 +47,15 @@ const signupHandler = async (req, res) => {
     password: hashed,
     pools_invested: [],
     investments: [],
+    role:'investor',
   });
   await newUser.save();
   const accessToken = jwtSign(
     newUser._id,
     newUser.investor_name,
     newUser.investor_email,
-    newUser?.profile[0]?.url
+    newUser?.profile[0]?.url,
+    newUser?.role
   );
   return res.status(201).json({ accessToken: accessToken });
 };

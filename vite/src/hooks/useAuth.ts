@@ -3,7 +3,8 @@ interface Payload extends JwtPayload{
     id:string
     name:string,
     email:string
-    profile:Profile[]
+    profile:Profile[],
+    role:string
 }
 interface Profile{
     url:string
@@ -15,9 +16,9 @@ const useAuth = () => {
     
     if (accessToken) {
       const decoded = jwtDecode(accessToken) as Payload
-      const { sub:id,name, email,  exp } = decoded
+      const { sub:id,name, email, role,  exp } = decoded
       const isExpired = exp! < Date.now() / 1000
-      return {id, name, email, isExpired};
+      return {id, name, email, role, isExpired};
     }else return null
   } catch (error) {
     console.error('Error decoding token:', error);

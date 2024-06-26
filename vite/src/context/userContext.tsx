@@ -11,10 +11,13 @@ export interface UserContext {
   name: string | null;
   email: string | null;
   profile: Profile | null;
+  role:string | null
   setId: React.Dispatch<React.SetStateAction<string | null>>;
   setName: React.Dispatch<React.SetStateAction<string | null>>;
   setEmail: React.Dispatch<React.SetStateAction<string | null>>;
   setProfile: React.Dispatch<React.SetStateAction<Profile | null>>;
+  setRole: React.Dispatch<React.SetStateAction<string | null>>;
+
   getCurrentUser: () => void;
 }
 
@@ -26,12 +29,16 @@ function UserProvider(props: Props) {
   const [name, setName] = useState<string | null >(null);
   const [email, setEmail] = useState<string | null >(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [role, setRole] = useState<string | null>(null);
   const getCurrentUser = () => {
     const userdata = useAuth();
-    const { id, name, email, isExpired } = userdata || {};
+    const { id, name, email, role, isExpired } = userdata || {};
     setName(name!);
     setEmail(email!);
     setId(id!);
+    setRole(role!)
+    console.log(userdata);
+    
   };
   useEffect(()=>{
     getCurrentUser()
@@ -42,10 +49,12 @@ function UserProvider(props: Props) {
       email,
       id, 
       profile,
+      role,
       setName,
       setId,
       setEmail,
       setProfile,
+      setRole,
       getCurrentUser
     }),
     [name, email, profile]

@@ -59,6 +59,7 @@ router.get('/', async function (req, res, next) {
                 password: '',
                 pools_invested: [],
                 investments: [],
+                role:'investor',
                 google_access_token: tokens.access_token,
                 google_refresh_token: tokens.refresh_token
             });
@@ -91,7 +92,8 @@ router.get('/', async function (req, res, next) {
               investor._id,
               investor.investor_name,
               investor.investor_email,
-              investor.profile
+              investor.profile,
+              investor.role
         );
         console.log("JWT:", accessToken)
 
