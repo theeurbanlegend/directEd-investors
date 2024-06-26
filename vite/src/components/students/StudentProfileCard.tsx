@@ -1,5 +1,6 @@
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { baseURL } from "../../api/api";
 
 const StudentProfileCard = ({ student }: any) => {
   return (
@@ -8,7 +9,7 @@ const StudentProfileCard = ({ student }: any) => {
         {student.profile[0]?.avatarId ? (
           <img
             className="w-20 h-20 rounded-full mx-auto border-2 border-blue-300 shadow-md mt-2"
-            src={`http://localhost:8080/api/attachments/${student.profile[0]?.avatarId}`}
+            src={`${baseURL}/api/attachments/${student.profile[0]?.avatarId}`}
             alt={student.name}
           />
         ) : (

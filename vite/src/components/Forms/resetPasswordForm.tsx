@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from "../../common/button";
 import { Input } from "../../common/input";
 import { toast } from 'react-toastify'; // If you are using toast notifications
+import { baseURL } from '../../api/api';
 // import PasswordInput from "../../common/PasswordInput";
 
 const ResetPassword = () => {
@@ -19,7 +20,7 @@ const ResetPassword = () => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:8080/api/inv/reset-password/${token}`, {
+      const response = await fetch(`${baseURL}/api/inv/reset-password/${token}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

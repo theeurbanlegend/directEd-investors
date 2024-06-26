@@ -97,7 +97,7 @@ router.get('/', async function (req, res, next) {
         );
         console.log("JWT:", accessToken)
 
-        const frontendRedirectUrl = `http://localhost:5173/dashboard?name=${encodeURIComponent(userData.given_name)}&email=${encodeURIComponent(userData.email)}&picture=${encodeURIComponent(userData.picture)}&token=${encodeURIComponent(accessToken)}`;
+        const frontendRedirectUrl = `https://directed-investors-platform.onrender.com/dashboard?name=${encodeURIComponent(userData.given_name)}&email=${encodeURIComponent(userData.email)}&picture=${encodeURIComponent(userData.picture)}&token=${encodeURIComponent(accessToken)}`;
         res.redirect(frontendRedirectUrl);
     } catch (err) {
         console.error('Error during authentication:', err);
