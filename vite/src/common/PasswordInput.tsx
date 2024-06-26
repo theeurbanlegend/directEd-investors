@@ -1,8 +1,14 @@
-import React from 'react'
 import { Input } from './input';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
-const PasswordInput = ({inputName,isPassVisible, setIsPassVisible, value,onChange, placeholder}) => {
+const PasswordInput = ({inputName,isPassVisible, setIsPassVisible, value,onChange, placeholder}:{
+  inputName:string,
+  isPassVisible:boolean,
+  setIsPassVisible:any,
+  value:string,
+  onChange:any,
+  placeholder:string
+}) => {
   return (
     <div className="relative w-full border border-input rounded-md shadow-sm flex flex-row items-center">
     <Input

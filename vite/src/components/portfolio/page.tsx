@@ -8,7 +8,7 @@ import PortfolioLoader from "./PortfolioLoader";
 const Portfolio = () => {
   const [investments, setInvestments] = useState(null);
   const { id, name } = useUserContext();
-  const { investor, isErrorInvestor, isLoadingInvestor } =  useGetInvestorDetailsQuery(id);
+  const { investor, isErrorInvestor, isLoadingInvestor } =  useGetInvestorDetailsQuery(id as any);
 
   useEffect(() => {
     if (!id) return;
@@ -16,8 +16,8 @@ const Portfolio = () => {
       try {
         if (investor && !isLoadingInvestor && !isErrorInvestor) {
           const { inv } = investor;
-          const investmentsResponse = inv.investments;
-          const poolsInvested = inv.pools_invested;
+          const investmentsResponse = inv.investments as any[];
+          const poolsInvested = inv.pools_invested as any[];
           const investments = investmentsResponse.map((investment) => {
             const pool = poolsInvested.find(
               (pool) => pool.pool_id?._id.toString() === investment.pool_invested.toString()
@@ -30,7 +30,7 @@ const Portfolio = () => {
               returns: investment.potential_returns,
             };
           });
-          setInvestments(investments);
+          setInvestments(investments as any);
           
         }
       } catch (error) {
