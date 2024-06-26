@@ -206,7 +206,7 @@ const forgotPassword = async (req, res) => {
       html: `
       <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
       <p>Please click on the following link, or paste this into your browser to complete the process:</p>
-      <p><a href=" http://localhost:5173/reset-password/${resetToken}">Reset Password</a></p>
+      <p><a href=" https://directed-investors-platform.onrender.com/reset-password/${resetToken}">Reset Password</a></p>
       <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
     `,
     };

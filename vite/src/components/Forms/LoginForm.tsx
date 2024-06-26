@@ -8,6 +8,7 @@ import { Separator } from "../../common/separator";
 import { useGetUserMutation } from "../../hooks/useGetUserMutation";
 import PasswordInput from "../../common/PasswordInput";
 import { toast } from "react-toastify";
+import { baseURL } from "../../api/api";
 
 const AuthButtons = [
   {
@@ -19,7 +20,7 @@ const AuthButtons = [
 
 
 async function auth() {
-  const response = await fetch("http://localhost:8080/request", {
+  const response = await fetch(`${baseURL}/request`, {
     method: "post",
   });
 
@@ -66,7 +67,7 @@ export default function Login() {
     }
   
     try {
-      const response = await fetch("http://localhost:8080/api/inv/forgot-password", {
+      const response = await fetch(`${baseURL}/api/inv/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
