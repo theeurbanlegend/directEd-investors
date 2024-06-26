@@ -1,4 +1,3 @@
-import React from "react";
 
 interface CardProps {
   heading1: string;
@@ -10,19 +9,6 @@ interface CardProps {
   paragraph2: string;
   Link: string;
 }
-interface Pool {
-  _id: string;
-  pool_name: string;
-  pool_slug: string;
-  pool_desc: string;
-  pool_target_amnt: string;
-  pool_progress: number;
-  pool_token: number;
-  pool_token_value: number;
-  pool_extra_desc: string;
-  pool_link: string;
-}
-
 const Cards = ({ pool }: any) => {
   const renderCard = ({
     heading1,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Title, { Subtitle } from '../../common/Title';
 import { Badge } from '../../common/badge';
 import LandingLayout from '../portfolio/layout';

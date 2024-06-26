@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useUserContext } from '../../context/userContext';
 import { getInvestorDetails } from '../../api/requests/getInvestorDetails';
 
 const LatestTransactionsTable = () => {
     const { id, getCurrentUser } = useUserContext();
-    const [transactions, setTransactions] = useState<any>(null);
+    const [transactions, setTransactions] = useState<any[] | null>(null);
     useEffect(() => {
       getCurrentUser();
       if(id){

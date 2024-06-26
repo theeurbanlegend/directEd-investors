@@ -1,5 +1,4 @@
 import { Skeleton } from '@radix-ui/themes';
-import React from 'react';
 
 
 const PortfolioLoader = () => {
@@ -7,7 +6,7 @@ const PortfolioLoader = () => {
     <div className="flex flex-row justify-center items-center w-full">
       <div className="flex flex-col justify-center items-center bg-white rounded-lg shadow-lg p-6 w-full">
         <div className="flex flex-col gap-4 w-full">
-          {Array.from('skeleton').map((investment, index) => (
+          {Array.from('skeleton').map((_investment, index) => (
             <div key={index} className="bg-gray-100 rounded-lg p-4 flex flex-col gap-4">
                 <Skeleton className="text-lg font-semibold" height={'20px'} />
                 <Skeleton className="text-lg font-semibold" height={'20px'} />

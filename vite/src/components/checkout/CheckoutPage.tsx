@@ -27,7 +27,7 @@ const CheckoutPage: React.FC = () => {
   if (validateMongoId(id) === false) {
     id = localStorage.getItem("poolId") as string;
   }
-  const { pool, isLoadingPool, isSuccessPool } = useGetPoolQuery({ id });
+  const { pool, isSuccessPool } = useGetPoolQuery({ id });
   useEffect(() => {
     //when isSuccess Pool replace href from id to sluf
     if (isSuccessPool && pool) {

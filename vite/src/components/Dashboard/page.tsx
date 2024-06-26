@@ -3,12 +3,11 @@ import DashboardStats from "../../common/DashboardState";
 import { useUserContext } from "../../context/userContext";
 import LandingLayout from "../portfolio/layout";
 import { useLocation } from "react-router-dom";
-import LatestTransactionsTable from "../Transactions/LatestTransactionsTable";
 
 const Dashboard = () => {
 	const location = useLocation();
 	  const queryParams = new URLSearchParams(location.search);
-	  const {name, role, getCurrentUser}=useUserContext()
+	  const {name, getCurrentUser}=useUserContext()
 	
 	useEffect(()=>{
 		const accessToken = queryParams.get('token');

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import LandingLayout from "../portfolio/layout";
 import StudentProfileCard from "../students/StudentProfileCard";
 import { useQuery } from "react-query";

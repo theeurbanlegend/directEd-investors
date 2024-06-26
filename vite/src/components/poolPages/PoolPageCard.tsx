@@ -20,7 +20,7 @@ const PoolPageCard: React.FC = () => {
   if (validateMongoId(id) === false) {
     id = localStorage.getItem("poolId") as string;
   }
-  const { pool, isLoadingPool, isSuccessPool } = useGetPoolQuery({ id });
+  const { pool, isSuccessPool } = useGetPoolQuery({ id });
   useEffect(() => {
     // when isSuccess Pool replace href from id to slug
     if (isSuccessPool && pool) {
@@ -37,12 +37,6 @@ const PoolPageCard: React.FC = () => {
     }
   };
 
-  const scrollToStudentProfiles = () => {
-    if (profilesRef.current) {
-      profilesRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-    setShowStudentProfiles(true);
-  };
 
   return (
     <LandingLayout>

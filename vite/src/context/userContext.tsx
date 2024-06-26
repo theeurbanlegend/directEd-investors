@@ -32,7 +32,7 @@ function UserProvider(props: Props) {
   const [role, setRole] = useState<string | null>(null);
   const getCurrentUser = () => {
     const userdata = useAuth();
-    const { id, name, email, role, isExpired } = userdata || {};
+    const { id, name, email, role } = userdata || {};
     setName(name!);
     setEmail(email!);
     setId(id!);
