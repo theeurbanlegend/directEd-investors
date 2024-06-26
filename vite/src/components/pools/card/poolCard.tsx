@@ -24,7 +24,6 @@ interface Pool {
 }
 
 const Cards = ({ pool }: any) => {
-  console.log(pool);
   const renderCard = ({
     heading1,
     paragraph,
