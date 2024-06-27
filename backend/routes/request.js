@@ -8,7 +8,7 @@ router.post('/', async function(req, res, next){
     res.header('Access-Control-Allow-Origin', 'https://directed-investors-platform.onrender.com')
     res.header('Referrer-Policy','no-referrer-when-downgrade')
 
-   const redirectUrl = `${process.env.FRONTEND_URL}/oauth`;
+   const redirectUrl = 'directed-investors.onrender.com/oauth';
 
    const oAouth2Client = new OAuth2Client (
     process.env.CLIENT_ID,
