@@ -29,7 +29,7 @@ async function getUserData(access_token) {
 router.get('/', async function (req, res, next) {
     const code = req.query.code;
     try {
-        const redirectUrl = `${process.env.FRONTEND_URL}/oauth`;
+        const redirectUrl = `directed-investors.onrender.com/oauth`;
         const oAuth2Client = new OAuth2Client(
             process.env.CLIENT_ID,
             process.env.CLIENT_SECRET,
