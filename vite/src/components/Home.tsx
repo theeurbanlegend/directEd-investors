@@ -45,11 +45,11 @@ const Header = () => {
                 </div>
                 <div className="w-[100%] md:w-[80%] lg:w-[50%] flex gap-4 items-center relative lg:flex-row flex-col">
                     <div className="lg:w-[50%] z-10 w-[100%]">
-                        <img src="/Raay.jpg" alt="Chart" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
+                        <img src="/public/images/ELIZABETH GITAU.jpg" alt="Chart" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
                     </div>
                     <div className="w-[50%] hidden flex-row lg:flex-col gap-4 lg:flex">
-                        <img src="/Raay.jpg" alt="Sales 1" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
-                        <img src="/Raay.jpg" alt="Sales 2" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
+                        <img src="/public/images/VICTOR KIMARU .jpg" alt="Sales 1" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
+                        <img src="/public/images/DENNIS MWANGANGI.jpg" alt="Sales 2" className="w-full border-4 border-solid border-gray-300 shadow-xl rounded-lg" />
                     </div>
                 </div>
             </div>

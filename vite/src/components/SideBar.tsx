@@ -22,11 +22,11 @@ const TopLinks = [
     href: "/pools",
     icon: < RiCoinsLine />,
   },
-  {
-    title: "Analytics",
-    href: "#",
-    icon: <IoBulbOutline />,
-  },
+  // {
+  //   title: "Analytics",
+  //   href: "#",
+  //   icon: <IoBulbOutline />,
+  // },
 ];
 
 const BottomLinks = [
