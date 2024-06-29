@@ -17,6 +17,7 @@ import PoolPageCard from "./components/poolPages/PoolPageCard";
 import CheckoutSuccess from "./components/checkout/CheckoutSuccess";
 import CheckoutCancel from "./components/checkout/CheckoutCancel";
 import ResetPassword from "./components/Forms/resetPasswordForm";
+import PrivacyPolicy from "./components/PrivacyPolicy/page";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/pools" element={<Pools />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
             <Route path="/create" element={<Create />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/student/:id" element={<StudentMoreDetails />} />
