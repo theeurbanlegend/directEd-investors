@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { GearIcon, PersonIcon } from "@radix-ui/react-icons";
 import { RiBriefcaseLine, RiCoinsLine } from "react-icons/ri";
 import { RxDashboard } from "react-icons/rx";
-import { IoBulbOutline } from "react-icons/io5";
+// import { IoBulbOutline } from "react-icons/io5";
 import { FaPen } from "react-icons/fa";
 import { useUserContext } from '../context/userContext'; // Adjust the import path according to your file structure
 
